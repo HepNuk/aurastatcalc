@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/aurastatcalc/static/css/main.ab7136cd.chunk.css",
+    "main.js": "/aurastatcalc/static/js/main.996213e3.chunk.js",
+    "main.js.map": "/aurastatcalc/static/js/main.996213e3.chunk.js.map",
+    "runtime-main.js": "/aurastatcalc/static/js/runtime-main.f439901d.js",
+    "runtime-main.js.map": "/aurastatcalc/static/js/runtime-main.f439901d.js.map",
+    "static/js/2.1604568b.chunk.js": "/aurastatcalc/static/js/2.1604568b.chunk.js",
+    "static/js/2.1604568b.chunk.js.map": "/aurastatcalc/static/js/2.1604568b.chunk.js.map",
+    "static/js/3.529906dc.chunk.js": "/aurastatcalc/static/js/3.529906dc.chunk.js",
+    "static/js/3.529906dc.chunk.js.map": "/aurastatcalc/static/js/3.529906dc.chunk.js.map",
+    "index.html": "/aurastatcalc/index.html",
+    "static/css/main.ab7136cd.chunk.css.map": "/aurastatcalc/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.1604568b.chunk.js.LICENSE.txt": "/aurastatcalc/static/js/2.1604568b.chunk.js.LICENSE.txt",
+    "static/media/logo.103b5fa1.svg": "/aurastatcalc/static/media/logo.103b5fa1.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f439901d.js",
+    "static/js/2.1604568b.chunk.js",
+    "static/css/main.ab7136cd.chunk.css",
+    "static/js/main.996213e3.chunk.js"
+  ]
+}
