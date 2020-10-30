@@ -95,6 +95,8 @@ body {
     background-color: black;
     color: #2fb2c9;
     font-family: itemFont;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
     border-style: solid;
     border-color: chocolate;
