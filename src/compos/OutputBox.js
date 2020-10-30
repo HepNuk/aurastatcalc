@@ -8,7 +8,12 @@ export default class OutputBox extends Component {
     return (
         <div className='page output'>
             <div className='output_box'>
-                <h1>Aura Stats output</h1>
+                <p>
+                    <h1>Aura Stats output</h1>
+                    Prismatic Jewel<br />
+                    Quality: 0 <br />
+                    Implicits: 0
+                </p>
                     <Aura auras={this.props.auras} globalAuraEffect={this.props.globalAuraEffect}/>
             </div>
         </div>

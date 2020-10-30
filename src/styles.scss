@@ -1,37 +1,35 @@
-.getColorCode{
-    bg_color: rgb(41, 46, 40);
-}
+@font-face {
+    font-family: itemFont;
+    src: url(./fonts/Fontin-Bold.ttf);
+  }
+
 *{
     box-sizing: border-box;
 }
 
-$navColors: (
-    bg_color: rgb(48, 168, 24),
-
-);
-$bgColors: (
-    bg_color: rgb(141, 45, 45),
-);
-
 body {
     padding: 10px;
-    background-color: rgb(51, 46, 46);
+    background-color: rgb(29, 26, 26);
 
     #root {
-        background-color: map-get($bgColors, bg_color);
+        background-color: none;
     }
 }
 
 .header{
-    padding: 1px;
-    text-align: center;
-    background-color: chartreuse;
+    padding: 15px;
+    text-align: left;
+    background-color: none;
+    margin-bottom: -20px;
+    margin-top: -40px;
 
     h1{
+        color: rgb(212, 212, 212);
         font-size: 40px;
+        margin-bottom: -15px;
     }
 
-    p{
+    p{  
         font-size: larger;
         color: white;
     }
@@ -39,14 +37,19 @@ body {
 
 .topnav {
     overflow: hidden;
-    background-color: map-get($navColors, bg_color);
+    background-color: none;
     padding: 5px;
+    margin-bottom: -16px;
+    
     button{
-        background-color: #b7e4ec; /* Green */
-        border: none;
+        background-color: chocolate; /* Green */
+        color: black;
+        border-style: solid;
+        border-color: rgb(196, 88, 11);
+        border-radius: 5px;
+
         padding: 10px 10px;
         width: 150px;
-        color: rgb(255, 0, 0);
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -70,39 +73,82 @@ body {
 }
 
 .content {
-    padding: 15px;
+    padding: 0px;
 }
 
 
 .main{
     padding: 8px;
-    background-color: aqua;
-    width: 75%;
+    background-color: none;
+    width: 73%;
 }
 
 .output{
 
-    width: 25%;
-    background-color: #f1f1f1;
+    width: 27%;
+    background-color: none;
     padding: 8px;
 
 }
 
 .output_box {
-    background-color: blueviolet;
+    background-color: black;
+    color: #2fb2c9;
+    font-family: itemFont;
+
+    border-style: solid;
+    border-color: chocolate;
+    border-radius: 8px;
+
     padding: 1px;
     padding-left: 15px;
     padding-right: 10px;
+
     height: 100%;
     width: 100%;
+
+    h1{
+        margin: 0;
+    }
+
+    p{
+        font-size: 15px;
+    }
+
+    li{
+        list-style-type: none;
+        font-size: 18px;
+        
+    }
+    .aura_stat{
+        color: rbg(136,136,255);
+    }
+    .aura_name{
+        color: rgb(220, 75, 75);
+    }
 }
 
 .page{
+    z-index: 2;
     float: left;
     height: 700px; 
 }
 
-.aura_stat{
-    list-style-type: none;
-    font-size: 18px;
+.mainapp{
+    background-color: rgb(236, 12, 12);
+
+    background-color: black;
+    color: #2fb2c9;
+    font-family: itemFont;
+
+    border-style: solid;
+    border-color: chocolate;
+    border-radius: 8px;
+
+    padding: 1px;
+    padding-left: 15px;
+    padding-right: 10px;
+
+    height: 100%;
+    width: 100%;
 }

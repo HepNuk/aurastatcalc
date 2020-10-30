@@ -8,10 +8,13 @@ export default class Aura extends Component {
             let tempString = [];
 
             if(aura.level > 0 && aura.level <= 40){
+
+                tempString.push(<li className='aura_name'>{'~ '+ aura.title +' ~'}</li>);
+                
                 let effects = aura.printEffect(globalEffect);
 
                 for(const effect of effects){
-                    tempString.push(effect);
+                    tempString.push(<li className='aura_stat'>{effect}</li>);
                 }
             }
 
@@ -19,11 +22,16 @@ export default class Aura extends Component {
                 let effects = aura.printQuality(globalEffect);
 
                 for(const effect of effects){
-                    tempString.push(effect);
+                    tempString.push(<li className='aura_stat'>{effect}</li>);
                 }
             }
+
+            console.log(tempString.length);
+            if (tempString.length !== 0){
+                tempString.push(<li className='aura_sepa'>{'~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~'}</li>);
+            }
         
-            return tempString.map((stat) => (<li className='aura_stat'>{stat}</li>))
+            return tempString.map((stat) => (stat))
         }
 
         return Object.entries(this.props.auras).map((aura) => (

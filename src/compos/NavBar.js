@@ -11,6 +11,7 @@ export default class NavBar extends Component {
     render() {
         return (
             <div className='topnav'>
+                <div className='divider' /><div className='divider' />
                 <button onClick={ this.handleChange.bind(this) } value='0' >Ascendancy</button><div className='divider' />
                 <button onClick={ this.handleChange.bind(this) } value='1' >Tree</button><div className='divider' />
                 <button onClick={ this.handleChange.bind(this) } value='2' >Clusters</button><div className='divider' />

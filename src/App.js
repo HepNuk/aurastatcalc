@@ -36,8 +36,8 @@ class App extends Component {
       return ( 
         <section className="app">
           <div className='header'>
-            <h1>Title Here</h1>
-            <p> this is a para</p>
+            <h1>Nuk's PoE Aura stats calculator</h1>
+            <p>- Under Construction</p>
           </div>
             <NavBar changePage={this.changePage.bind(this)} />
           <div className="content">
