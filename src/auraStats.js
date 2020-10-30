@@ -111,9 +111,9 @@ var printPercentEffect = function(effect, value, auraEffect){
 class Aura {
     constructor(title, effectOfQuality, statPerQuality, numberEffects, effectOfAura) {
         this.title = title;
-        this.level = 0;
-        this.quality = 0;
-        this.altQuality = 0;
+        this.level = 2;
+        this.quality = 20;
+        this.altQuality = 1;
         this.specificAuraEffect = 0;
         this.effectOfQuality = effectOfQuality;
         this.statPerQuality = statPerQuality;
@@ -124,11 +124,10 @@ class Aura {
             let tempArray = [];
             if (this.level !== 0 && this.level <= 40) {
                 tempArray = printAuraEffect(this.effectOfAura, this.numberEffects, this.level, (this.specificAuraEffect + auraEffect));
-                console.log(tempArray);
                 return tempArray;
 
             } else
-                return null;
+                return [''];
 
         };
 
@@ -136,17 +135,17 @@ class Aura {
             let tempArray = [];
             if (this.altQuality !== 0 && this.quality !== 0) {
                 tempArray = printQualityEffect(this.effectOfQuality[this.altQuality], this.statPerQuality[this.altQuality], this.quality, (this.specificAuraEffect + auraEffect));
-                console.log(tempArray);
                 return tempArray;
 
             } else
-                return null;
+                return [''];
 
         };
     }
 }
 
-/*
+/* Template for new Aura.
+
 AURA: new Aura(
     //Title 
     '',

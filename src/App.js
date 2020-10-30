@@ -1,25 +1,50 @@
 import React, { Component } from 'react';
-import MenuBar from './compos/MenuBar';
+import NavBar from './compos/NavBar';
 import MainPage from './compos/MainPage';
 import OutputBox from './compos/OutputBox';
-//import auras from './auraStats.js';
+import AscendancyPage from './compos/pages/AscendancyPage';
+import TreePage from './compos/pages/TreePage';
+import ClusterPage from './compos/pages/ClusterPage';
+import GearPage from './compos/pages/GearPage';
+import GemPage from './compos/pages/GemPage';
+
+import './styles.css';
 var auras = require('./auraStats').default;
 
 class App extends Component {
-  state = { 
-    auras
+  state = {
+    auras,
+    globalAuraEffect: 100,
+    mainPage: {
+      pageSelected: 0,
+      pages: [
+      <AscendancyPage></AscendancyPage>,
+      <TreePage></TreePage>,
+      <ClusterPage></ClusterPage>,
+      <GearPage></GearPage>,
+      <GemPage></GemPage>
+      ]
+    }
    }
 
+  changePage(pageNum){
+     if (this.state.mainPage.pageSelected !== pageNum)
+      this.setState({ mainPage: { ...this.state.mainPage, pageSelected: pageNum} });
+   }
+   
   render() {
-    console.log(auras); 
-    auras.ANGER.printEffect(100);
-  
       return ( 
-        <div className="App">
-          <MenuBar />
-          <MainPage auras={this.state.auras}/>
-          <OutputBox auras={this.state.auras}/>
-        </div>
+        <section className="app">
+          <div className='header'>
+            <h1>Title Here</h1>
+            <p> this is a para</p>
+          </div>
+            <NavBar changePage={this.changePage.bind(this)} />
+          <div className="content">
+            <MainPage content={this.state.mainPage} auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
+            <OutputBox auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
+          </div>
+        </section>
     );
   }
 }

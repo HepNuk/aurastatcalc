@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-export default class MenuBar extends Component {
+export default class AscendancyPage extends Component {
     render() {
         return (
             <div>
-                MenuBar
+                <h1>Ascendance Page</h1>
             </div>
         )
     }
