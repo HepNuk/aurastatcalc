@@ -18,7 +18,7 @@ export default class Aura extends Component {
                 }
             }
 
-            if(aura.quality > 0 && aura.altQuality !== 0){
+            if(aura.quality > 0 && aura.statPerQuality[aura.altQuality] !== 0){
                 let effects = aura.printQuality(globalEffect);
 
                 for(const effect of effects){

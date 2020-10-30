@@ -254,7 +254,7 @@ var auras = {
             [' '],
         ],
         //Values Per Quality of the diffrent alt Qualities
-        ['', '', ''], 
+        [0, 0, 0], 
         //Values at each level for the aura
         [
             [   [0, 0], 
