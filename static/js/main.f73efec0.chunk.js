@@ -1,2 +1,0 @@
-(this.webpackJsonpaurastatcalc=this.webpackJsonpaurastatcalc||[]).push([[0],{9:function(t,e,c){"use strict";c.r(e);var a=c(0),s=c(1),n=c.n(s),r=c(3);var i=function(){return Object(a.jsx)("div",{className:"App",children:"Test"})};c.n(r).a.render(Object(a.jsx)(n.a.StrictMode,{children:Object(a.jsx)(i,{})}),document.getElementById("root"))}},[[9,1,2]]]);
-//# sourceMappingURL=main.f73efec0.chunk.js.map
