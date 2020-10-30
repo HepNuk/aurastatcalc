@@ -113,7 +113,7 @@ class Aura {
         this.title = title;
         this.level = 21;
         this.quality = 20;
-        this.altQuality = 1;
+        this.altQuality = 2;
         this.specificAuraEffect = 0;
         this.effectOfQuality = effectOfQuality;
         this.statPerQuality = statPerQuality;
@@ -355,26 +355,162 @@ var auras = {
 
     ZEALOTRY: new Aura(
         //Title 
-        '',
+        'Zealotry',
         //AlternateQualityBonuses 
         [
             [''],
-            [''],
-            [''],
+            ['% to Critical Strike Multiplier'],
+            ['% of Life per second'],
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0, 0],
+        [0, 0.25, 0.02],
         //Values at each level for the aura
         [
-            [],
-            [],
+            [   0,
+                10, 10, 10, 11, 11, 11, 12, 12, 12, 12,
+                13, 13, 13, 14, 14, 14, 14, 15, 15, 15,
+                16, 16, 16, 16, 17, 17, 17, 18, 18, 18,
+                18, 18, 19, 19, 19, 19, 19, 19, 19, 20
+            ],
+            [   0,
+                20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 
+                30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 
+                40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 
+                49, 50, 50, 51, 51, 52, 52, 53, 53, 54
+            ],
         ],
         //Aura Bonuses
         [
-            [''],
-            [''],
+            ['% more Spell Damage'],
+            ['% increased Spell Critical Strike Chance'],
         ]
     ),
+
+    PURITY_FIRE: new Aura(
+        //Title 
+        'Purity of Fire',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% chance to avoid being Ignited'],
+            ['Damage Penetrates ', '% Fire Resistance'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 1, 0.2],
+        //Values at each level for the aura
+        [
+            [   0,
+                0, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+                2, 2, 2, 2, 2, 2, 3, 3, 3, 4,
+                4, 4, 5, 5, 5, 5, 5, 5, 5, 5,
+                5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+            ],
+            [   0,
+                22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+                32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+                51, 52, 52, 53, 53, 54, 54, 55, 55, 56
+            ],
+        ],
+        //Aura Bonuses
+        [
+            ['+', '% to maximum Fire Resistance'],
+            ['+', '% to Fire Resistance'],
+        ]
+    ),    
+
+    PURITY_ICE: new Aura(
+        //Title 
+        'Purity of Ice',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% chance to avoid being Frozen'],
+            ['Damage Penetrates ', '% Cold Resistance'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 1, 0.2],
+        //Values at each level for the aura
+        [
+            [   0,
+                0, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+                2, 2, 2, 2, 2, 2, 3, 3, 3, 4,
+                4, 4, 5, 5, 5, 5, 5, 5, 5, 5,
+                5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+            ],
+            [   0,
+                22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+                32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+                51, 52, 52, 53, 53, 54, 54, 55, 55, 56
+            ],
+        ],
+        //Aura Bonuses
+        [
+            ['+', '% to maximum Cold Resistance'],
+            ['+', '% to Cold Resistance'],
+        ]
+    ),
+    
+    PURITY_LIGHTNING: new Aura(
+        //Title 
+        'Purity of Lightning',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% chance to avoid being Frozen'],
+            ['Damage Penetrates ', '% Lightning Resistance'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 1, 0.2],
+        //Values at each level for the aura
+        [
+            [   0,
+                0, 0, 0, 0, 1, 1, 1, 1, 1, 1,
+                2, 2, 2, 2, 2, 2, 3, 3, 3, 4,
+                4, 4, 5, 5, 5, 5, 5, 5, 5, 5,
+                5, 5, 5, 5, 5, 5, 5, 5, 5, 5
+            ],
+            [   0,
+                22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+                32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+                51, 52, 52, 53, 53, 54, 54, 55, 55, 56
+            ],
+        ],
+        //Aura Bonuses
+        [
+            ['+', '% to maximum Lightning Resistance'],
+            ['+', '% to Lightning Resistance'],
+        ]
+    ),
+
+    PURITY_ELEMENTS: new Aura(
+        //Title 
+        'Purity of Elements',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% chance to avoid Elemental Ailments'],
+            ['Damage Penetrates ', '% Elemental Resistance'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0.5, 0.2],
+        //Values at each level for the aura
+        [
+            [   0,
+                12, 13, 14, 15, 15, 16, 17, 18, 19, 20,
+                20, 21, 22, 23, 24, 25, 25, 26, 27, 27,
+                28, 29, 29, 30, 31, 31, 32, 33, 33, 34,
+                34, 34, 34, 35, 35, 36, 36, 36, 36, 37
+            ],
+        ],
+        //Aura Bonuses
+        [
+            ['+', '% to all Elemental Resistances']
+        ]
+    ),
+
 };
 
 export default auras;
