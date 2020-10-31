@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 
 export default class NavBar extends Component {
 
@@ -12,11 +13,25 @@ export default class NavBar extends Component {
         return (
             <div className='topnav'>
                 <div className='divider' /><div className='divider' />
-                <button onClick={ this.handleChange.bind(this) } value='0' >Ascendancy</button><div className='divider' />
-                <button onClick={ this.handleChange.bind(this) } value='1' >Tree</button><div className='divider' />
-                <button onClick={ this.handleChange.bind(this) } value='2' >Clusters</button><div className='divider' />
-                <button onClick={ this.handleChange.bind(this) } value='3' >Gear</button><div className='divider' />
-                <button onClick={ this.handleChange.bind(this) } value='4' >Gem Links</button>
+                    <Link to='/aurastatcalc/'>   
+                        <button>Home</button>
+                    </Link>
+                <div className='divider' />
+                    <Link to='/aurastatcalc/tree'>   
+                        <button>Tree</button>
+                    </Link>
+                <div className='divider' />
+                    <Link to='/aurastatcalc/clusters'>   
+                        <button>Clusters</button>
+                    </Link>
+                <div className='divider' />
+                    <Link to='/aurastatcalc/gear'>   
+                        <button>Gear</button>
+                    </Link>
+                <div className='divider' />
+                    <Link to='/aurastatcalc/auras'>
+                        <button>Auras</button>
+                    </Link>
             </div>
         )
     }

@@ -30,7 +30,7 @@ export default class Aura extends Component {
             }
 
             if (tempString.length !== 0){
-                tempString.push(<li className='aura_sepa'>{'~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~'}</li>);
+                tempString.push(<li key={aura.key} className='aura_sepa'>{'~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~'}</li>);
             }
         
             return tempString.map((stat) => (stat))
