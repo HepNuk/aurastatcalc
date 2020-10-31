@@ -14,15 +14,22 @@ var auras = require('./auraStats').default;
 class App extends Component {
   state = {
     auras,
+
+    ascendancy: 0,
+
     globalAuraEffect: 100,
 
     mainPage: {
-      pageSelected: 4,
+      pageSelected: 0,
       pages: [
       <AscendancyPage auras={auras}/>,
+      
       <TreePage auras={auras}/>,
+
       <ClusterPage auras={auras}/>,
+
       <GearPage auras={auras}/>,
+
       <GemPage  changeGenoType={this.changeGenoType.bind(this)}
                 changeGenoLevel={this.changeGenoLevel.bind(this)}
                 changeAltQuality={this.changeAltQuality.bind(this)} 

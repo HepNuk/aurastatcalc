@@ -48,23 +48,24 @@ export default class DisplayAura extends Component {
 
             <div className='auras'>
                 <div className='generosity'>
-                    <img src={"aurastatcalc/img/aura/"+ this.props.aura[0].toLowerCase() +".png"}/>
+                    <img src={"img/aura/"+ this.props.aura[0].toLowerCase() +".png"}/>
                     <span className='aura_title'>{this.props.aura[1].title}</span>
                     
                     <div className='inputs'>
-                    <img src='aurastatcalc/img/gem/generosity.png'/>
                     
-                    
+                    <img src='img/gem/generosity.png'/>
+                
                         <select onChange={this.onChangeGenoType.bind(this)} defaultValue={this.props.aura[1].generosityType}>
                             <option value='0'>None</option>
                             <option value='1'>Generosity</option>
                             <option value='2'>Awakened</option>
                         </select>
+
                         <input onChange={this.onChangeGenoLevel.bind(this)} defaultValue={this.props.aura[1].generosityLevel} type='number' min='0' max='40' placeholder='Lvl' />
                     </div>
                 </div>
                 <div className='aura'>
-                <img src={"aurastatcalc/img/gem/"+ this.props.aura[0].toLowerCase() +".png" }/>
+                <img src={"img/gem/"+ this.props.aura[0].toLowerCase() +".png" }/>
 
                     
                     <div className='inputs'>
