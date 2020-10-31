@@ -15,17 +15,43 @@ class App extends Component {
   state = {
     auras,
     globalAuraEffect: 100,
+
     mainPage: {
-      pageSelected: 0,
+      pageSelected: 4,
       pages: [
-      <AscendancyPage></AscendancyPage>,
-      <TreePage></TreePage>,
-      <ClusterPage></ClusterPage>,
-      <GearPage></GearPage>,
-      <GemPage></GemPage>
+      <AscendancyPage auras={auras}/>,
+      <TreePage auras={auras}/>,
+      <ClusterPage auras={auras}/>,
+      <GearPage auras={auras}/>,
+      <GemPage  changeGenoType={this.changeGenoType.bind(this)}
+                changeGenoLevel={this.changeGenoLevel.bind(this)}
+                changeAltQuality={this.changeAltQuality.bind(this)} 
+                changeQuality={this.changeQuality.bind(this)} 
+                changeLevel={this.changeLevel.bind(this)} 
+                auras={auras}/>,
       ]
     }
-   }
+  }
+
+  changeLevel(newLevel, auraKey){
+    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], level: newLevel}} });
+  }
+
+  changeQuality(newQuality, auraKey){
+    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], quality: newQuality}} });
+  }
+
+  changeAltQuality(newAltQuality, auraKey){
+    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], altQuality: newAltQuality}} });
+  }
+
+  changeGenoLevel(newGenoLevel, auraKey){
+    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], generosityLevel: newGenoLevel}} });
+  }
+
+  changeGenoType(newGenoType, auraKey){
+    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], generosityType: newGenoType}} });
+  }
 
   changePage(pageNum){
      if (this.state.mainPage.pageSelected !== pageNum)
@@ -33,6 +59,7 @@ class App extends Component {
    }
    
   render() {
+      console.log(this.state.auras);
       return ( 
         <section className="app">
           <div className='header'>
@@ -41,7 +68,7 @@ class App extends Component {
           </div>
             <NavBar changePage={this.changePage.bind(this)} />
           <div className="content">
-            <MainPage content={this.state.mainPage} auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
+            <MainPage gemLinksPage={this.state.gemLinksPage} content={this.state.mainPage} auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
             <OutputBox auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
           </div>
         </section>

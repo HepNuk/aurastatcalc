@@ -1,3 +1,7 @@
+.fr {
+  float: right;
+}
+
 @font-face {
   font-family: itemFont;
   src: url(./fonts/Fontin-Bold.ttf);
@@ -62,6 +66,10 @@ body #root {
   background-color: #4499a8;
 }
 
+.topnav button:active {
+  background-color: black;
+}
+
 .divider {
   width: 5px;
   height: auto;
@@ -106,11 +114,25 @@ body #root {
   width: 100%;
 }
 
+.output_box .sticky {
+  background-position-y: -50px;
+  padding-top: 5px;
+  padding-bottom: 1px;
+  background-color: black;
+  position: -webkit-sticky;
+  position: sticky;
+  margin-top: -15px;
+  margin-bottom: 10px;
+  top: -1px;
+}
+
 .output_box h1 {
   margin: 0;
+  margin-top: 5px;
 }
 
 .output_box p {
+  margin-top: 0;
   font-size: 15px;
 }
 
@@ -130,7 +152,7 @@ body #root {
 .page {
   z-index: 2;
   float: left;
-  height: 700px;
+  height: 780px;
 }
 
 .mainapp {
@@ -146,5 +168,127 @@ body #root {
   padding-right: 10px;
   height: 100%;
   width: 100%;
+}
+
+.gem_page {
+  background-color: #0f4f5a;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+}
+
+.gem_grps {
+  /*
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-top: 30px;
+    margin-top: -2%;
+    float: left;
+    color: black;
+    width: 100%;
+    height: 94%;
+    */
+  background-color: #3a4141;
+  color: #f0f0f0;
+}
+
+.gem_grps .auras {
+  float: left;
+  width: 420px;
+  border-radius: 5px;
+  background: #111;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  color: #bbb;
+  display: block;
+}
+
+.gem_grps .auras .aura {
+  float: left;
+  font-size: 16px;
+  line-height: 35px;
+  width: 420px;
+}
+
+.gem_grps .auras .inputs {
+  float: right;
+}
+
+.gem_grps .auras .aura_title {
+  font-size: 16px;
+}
+
+.gem_grps .auras .details {
+  font-size: 14px;
+}
+
+.gem_grps .auras .generosity {
+  float: left;
+  font-size: 16px;
+  line-height: 35px;
+  width: 420px;
+}
+
+.gem_grps .auras .generosity img {
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  float: left;
+  margin-right: 5px;
+}
+
+.gem_grps .auras .generosity select {
+  width: 100px;
+}
+
+.gem_grps .auras .generosity .inputs {
+  float: right;
+}
+
+.gem_grps .auras .awakgenerosity {
+  float: right;
+}
+
+.gem_grps .auras .awakgenerosity img {
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  float: left;
+  margin-right: 5px;
+}
+
+.gem_grps .auras img {
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  float: left;
+  margin-right: 5px;
+}
+
+.gem_grps .auras .disabled input[type=number] {
+  border: 1px solid #777;
+}
+
+.gem_grps .auras input[type=number] {
+  border: 1px solid #ccc;
+  background: #222;
+  font-size: 14px;
+  color: #fff;
+  line-height: 25px;
+  padding: 0 2px;
+  width: 50px;
+  margin-right: 3px;
+}
+
+.gem_grps .auras select {
+  border: 1px solid #ccc;
+  background: #222;
+  font-size: 14px;
+  color: #fff;
+  line-height: 25px;
+  padding: 2px;
+  width: 85px;
+  margin-right: 3px;
+  height: 27px;
 }
 /*# sourceMappingURL=styles.css.map */

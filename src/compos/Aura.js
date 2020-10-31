@@ -18,7 +18,7 @@ export default class Aura extends Component {
                 }
             }
 
-            if(aura.quality > 0 && aura.statPerQuality[aura.altQuality] !== 0){
+            if(aura.level > 0 && aura.quality > 0 && aura.statPerQuality[aura.altQuality] !== 0){
                 let effects = aura.printQuality(globalEffect);
 
                 for(const effect of effects){
@@ -26,9 +26,8 @@ export default class Aura extends Component {
                 }
             }
 
-            console.log(tempString.length);
             if (tempString.length !== 0){
-                tempString.push(<li className='aura_sepa'>{'~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~'}</li>);
+                tempString.push(<li className='aura_sepa'>{'~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~ ~'}</li>);
             }
         
             return tempString.map((stat) => (stat))

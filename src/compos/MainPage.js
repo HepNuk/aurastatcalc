@@ -4,7 +4,6 @@ import PropType from 'prop-types';
 
 export default class MainPage extends Component {
     render() {
-
         
         return (
             <div className='page main'>

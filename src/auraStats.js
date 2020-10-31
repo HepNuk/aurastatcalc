@@ -111,19 +111,49 @@ var printPercentEffect = function(effect, value, auraEffect){
 class Aura {
     constructor(title, effectOfQuality, statPerQuality, numberEffects, effectOfAura) {
         this.title = title;
-        this.level = 21;
-        this.quality = 20;
-        this.altQuality = 2;
+        this.level = 0;
+        this.quality = 0;
+        this.altQuality = 0;
         this.specificAuraEffect = 0;
         this.effectOfQuality = effectOfQuality;
         this.statPerQuality = statPerQuality;
         this.numberEffects = numberEffects;
         this.effectOfAura = effectOfAura;
 
+        this.generosityLevel = 0;
+        this.generosityType = 0;
+        
+        this.generosityEffect = [
+
+            [0],
+
+            [   0,
+                20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
+                30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+                49, 50, 50, 51, 51, 52, 52, 53, 53, 54
+            ],
+            [   0,
+                41, 43, 45, 47, 49, 51, 53, 55, 57, 59,
+                60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                69, 69, 69, 69, 69, 69, 69, 69, 69, 69,
+                69, 69, 69, 69, 69, 69, 69, 69, 69, 69
+            ],
+        ];
+
+        this.generosityAuraEffect = function(){
+
+            if(this.generosityType > 0 && this.generosityLevel > 0 ){
+                console.log(this.generosityEffect[this.generosityType][this.generosityLevel]);
+                return this.generosityEffect[this.generosityType][this.generosityLevel];
+            } else return 0;
+        }
+
         this.printEffect = function (auraEffect) {
             let tempArray = [];
             if (this.level !== 0 && this.level <= 40) {
-                tempArray = printAuraEffect(this.effectOfAura, this.numberEffects, this.level, (this.specificAuraEffect + auraEffect));
+                tempArray = printAuraEffect(this.effectOfAura, this.numberEffects, this.level, 
+                                                (this.specificAuraEffect + auraEffect + this.generosityAuraEffect()));
                 return tempArray;
 
             } else
@@ -134,7 +164,9 @@ class Aura {
         this.printQuality = function (auraEffect) {
             let tempArray = [];
             if (this.altQuality !== 0 && this.quality !== 0) {
-                tempArray = printQualityEffect(this.effectOfQuality[this.altQuality], this.statPerQuality[this.altQuality], this.quality, (this.specificAuraEffect + auraEffect));
+                tempArray = printQualityEffect(this.effectOfQuality[this.altQuality], 
+                                                this.statPerQuality[this.altQuality],  this.quality, 
+                                                (this.specificAuraEffect + auraEffect +  this.generosityAuraEffect()));
                 return tempArray;
 
             } else
