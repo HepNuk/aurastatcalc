@@ -3,6 +3,9 @@ import React, { Component } from 'react'
 
 export default class Aura extends Component {
     render() {
+
+        console.log(this.props.auras);
+
         let printEffects = (aura, globalEffect) => {
 
             let tempString = [];
@@ -33,8 +36,8 @@ export default class Aura extends Component {
             return tempString.map((stat) => (stat))
         }
 
-        return Object.entries(this.props.auras).map((aura) => (
-                printEffects(aura[1], this.props.globalAuraEffect)
+        return this.props.auras.map((aura) => (
+            printEffects(aura, this.props.globalAuraEffect)
         ));
     }
 }

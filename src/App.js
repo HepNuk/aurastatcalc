@@ -41,23 +41,38 @@ class App extends Component {
   }
 
   changeLevel(newLevel, auraIndex){
-    this.setState({ auras: { ...this.state.auras, [auraIndex]: {...this.state.auras[auraIndex], level: newLevel}} });
+
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].level = Number(newLevel);
+    this.setState({ auras: newAuraState });
+
   }
 
   changeQuality(newQuality, auraIndex){
-    this.setState({ auras: { ...this.state.auras, [auraIndex]: {...this.state.auras[auraIndex], quality: newQuality}} });
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].quality = Number(newQuality);
+    this.setState({ auras: newAuraState });
   }
 
   changeAltQuality(newAltQuality, auraIndex){
-    this.setState({ auras: { ...this.state.auras, [auraIndex]: {...this.state.auras[auraIndex], altQuality: newAltQuality}} });
+
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].altQuality = Number(newAltQuality);
+    this.setState({ auras: newAuraState });
   }
 
   changeGenoLevel(newGenoLevel, auraIndex){
-    this.setState({ auras: { ...this.state.auras, [auraIndex]: {...this.state.auras[auraIndex], generosityLevel: newGenoLevel}} });
+
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].generosityLevel = Number(newGenoLevel);
+    this.setState({ auras: newAuraState });
   }
 
   changeGenoType(newGenoType, auraIndex){
-    this.setState({ auras: { ...this.state.auras, [auraIndex]: {...this.state.auras[auraIndex], generosityType: newGenoType}} });
+
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].generosityType = Number(newGenoType);
+    this.setState({ auras: newAuraState });
   }
 
   changePage(pageNum){

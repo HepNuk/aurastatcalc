@@ -7,8 +7,9 @@ import DisplayAura from './DisplayAura';
 
 
 export default class DisplayAuras extends Component {
-
+    
     render() {
+        console.log(this.props.auras);
         return this.props.auras.map((aura) => (
             <DisplayAura 
 

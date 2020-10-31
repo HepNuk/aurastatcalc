@@ -145,7 +145,6 @@ class Aura {
         this.generosityAuraEffect = function(){
 
             if(this.generosityType > 0 && this.generosityLevel > 0 ){
-                console.log(this.generosityEffect[this.generosityType][this.generosityLevel]);
                 return this.generosityEffect[this.generosityType][this.generosityLevel];
             } else return 0;
         }

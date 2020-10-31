@@ -41,9 +41,6 @@ export default class DisplayAura extends Component {
     }
 
     render() {
-        console.log(this.props.indexAura)
-
-        
         return (
             
             <div className='auras'>
