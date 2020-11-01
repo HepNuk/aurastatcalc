@@ -4,15 +4,16 @@ import React, { Component } from 'react'
 export default class Aura extends Component {
     render() {
 
-        console.log(this.props.auras);
-
         let printEffects = (aura, globalEffect) => {
 
             let tempString = [];
 
             if(aura.level > 0 && aura.level <= 40){
 
-                tempString.push(<li className='aura_name'>{'~ '+ aura.title +' ~'}</li>);
+                if(aura.specificAuraEffect > 0)
+                tempString.push(<li className='aura_name'>{`~ ${aura.title} (has +${aura.specificAuraEffect}% increased effect) ~`}</li>);
+                else 
+                tempString.push(<li className='aura_name'>{`~ ${aura.title} ~`}</li>);
                 
                 let effects = aura.printEffect(globalEffect);
 

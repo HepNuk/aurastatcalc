@@ -1,20 +1,21 @@
-var clusterNodes = {
+var clusterNodes = [
+
+    { name: 'Small 6% Aura Effect', affects:[], auraEffect: 6, amount: 0},
+
+    { name: 'Small 7% Aura Effect', affects:[], auraEffect: 7, amount: 0 },
+
+    { name: 'Small 8% Aura Effect', affects:[], auraEffect: 8, amount: 0 },
     
-    FIRST_AMONG: { name: 'First Among Equals', affects: [], auraEffect: 10, },
+    { name: 'First Among Equals', affects: [], auraEffect: 10, amount: 0 },
 
-    REPLENISHING: { name: 'Replenishing Presence', affects: [], auraEffect: 8, },
+    { name: 'Replenishing Presence', affects: [], auraEffect: 8, amount: 0 },
 
-    VENGEFUL: {  name: 'Vengeful Commander', affects: ['ANGER', 'HATRED', 'WRATH'], auraEffect: 20, },
+    { name: 'Vengeful Commander', affects: ['ANGER', 'HATRED', 'WRATH'], auraEffect: 20, amount: 0 },
 
-    STALWART: { name: 'Stalwart Commander', affects: ['GRACE', 'DISCIPLINE', 'DETERMINATION'], auraEffect: 30, },
+    { name: 'Stalwart Commander', affects: ['GRACE', 'DISCIPLINE', 'DETERMINATION'], auraEffect: 30, amount: 0 },
 
-    PURE_COMMANDER: { name: 'Vengeful Commander', affects:[['PURITY_ICE', 'PURITY_FIRE', 'PURITY_LIGHTNING'], ['PURITY_ELEMENTS']], auraEffect: [10, 30],},
+    { name: 'Pure Commander', affects:[['PURITY_ICE', 'PURITY_FIRE', 'PURITY_LIGHTNING'], ['PURITY_ELEMENTS']], auraEffect: [10, 30], amount: 0},
 
-    SMALL_6:{ name: '6% Aura Effect', affects:[], auraEffect: 6 },
-
-    SMALL_7:{ name: '7% Aura Effect', affects:[], auraEffect: 7 },
-
-    SMALL_8:{ name: '8% Aura Effect', affects:[], auraEffect: 8 },
-}
-
+    { name: 'Precise Commander', key:'PRECISE_COMMANDER', special: true, amount: 0, effect: function(){ return [`${25 * this.amount}% increased Critical Strike Chance`,`+${10 * this.amount}% to Critical Strike Multiplier`] }} 
+]
 export default clusterNodes;

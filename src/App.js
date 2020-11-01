@@ -10,12 +10,12 @@ import GemPage from './compos/pages/GemPage';
 
 import './styles.css';
 var auras = require('./auraStats').default;
-var cluters = require('./clusterJewels').default;
+var clusters = require('./clusterJewels').default;
 
 class App extends Component {
   state = {
     auras,
-    clusterJewels,
+    clusters,
 
     globalAuraEffect: 0,
 
@@ -27,23 +27,18 @@ class App extends Component {
 
       },
       tree: {
-        sovereignty:{
-
-          small: [[0,6]],
-
-        },
-        total: function(){return 0}
+        amount: 0,
+        total: function(){return this.amount}
       },
       cluster: {
-        
-        total: function(){return 0}
+        amount: 0,
       },
       gear: {
-        
-        total: function(){return 0}
+        amount: 0,
+        total: function(){return this.amount}
       },
       total: function(){
-        return this.asc.total() + this.tree.total() + this.cluster.total() + this.gear.total();
+        return this.asc.total() + this.tree.total() + this.cluster.amount + this.gear.total();
       }
     }
   }
@@ -83,22 +78,51 @@ class App extends Component {
     this.setState({ auras: newAuraState });
   }
 
-  changePage(pageNum){
-     if (this.state.mainPage.pageSelected !== pageNum)
-      this.setState({ mainPage: { ...this.state.mainPage, pageSelected: pageNum} });
+   changeSpecificAuraEffect(newSpecificEffect, auraKey){
+    if(this.findAuraIndex(auraKey) !== null){
+      let auraIndex = this.findAuraIndex(auraKey);
+
+      let newAuraState = [...this.state.auras];
+      newAuraState[auraIndex].specificAuraEffect = Number(newSpecificEffect);
+      this.setState({ auras: newAuraState });
+    }
+   }
+
+   changeGlobalAuraEffect(newAuraEffect, page){
+
+    this.setState({auraEffect: {...this.state.auraEffect, [page]: {...this.state.auraEffect[page], amount: newAuraEffect}}});
+   }
+
+   changeClusterAmount(newAmount, clusterIndex){
+
+    let newClusterStats = [...this.state.clusters];
+    
+    newClusterStats[clusterIndex].amount = Number(newAmount);
+    this.setState({clusters: newClusterStats});
+   }
+
+   findAuraIndex(auraKey){
+    let index = null;
+    auras.forEach((aura) => {
+
+      if(aura.key === auraKey){
+        index = auras.indexOf(aura);
+      }
+    })
+    return index;
    }
    
   render() {
-      console.log(this.state.auras);
+    console.log(this.state.auras[7]);
       return ( 
         <section className="app">
           <div className='header'>
             <h1>Nuk's PoE Aura stats calculator</h1>
             <p>- Under Construction</p>
           </div>
-
+          
           <Router>
-            <NavBar changePage={this.changePage.bind(this)} />
+            <NavBar />
           <div className="content">
 
                 <div className='page main'>
@@ -121,8 +145,12 @@ class App extends Component {
                       
                       render = {(props) => (
                         <ClusterPage {...props} 
-                          clusterJewels={this.state.clusterJewels}
-                          auras={auras} />
+
+                          changeClusterAmount={this.changeClusterAmount.bind(this)}
+                          changeGlobalAuraEffect={this.changeGlobalAuraEffect.bind(this)}
+                          changeSpecificAuraEffect={this.changeSpecificAuraEffect.bind(this)}
+                          clusters={clusters}
+                         />
                       )}
                     />
                     
@@ -150,7 +178,7 @@ class App extends Component {
                   </Switch> 
                 </div>
               
-            <OutputBox auras={this.state.auras} globalAuraEffect={this.state.auraEffect.total()} />
+            <OutputBox clusters={this.state.clusters} auras={this.state.auras} globalAuraEffect={this.state.auraEffect.total()} />
           </div>
           </Router>
         </section>

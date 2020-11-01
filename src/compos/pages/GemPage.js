@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import DisplayAuras from './gemLinkTabs/DisplayAuras';
 
-
-var genoIcon = 'generosity.png';
-
 export default class GemPage extends Component {
     onChangeGenoIcon(e){
         console.log(this.genoIcon);
