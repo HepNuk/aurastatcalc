@@ -11,11 +11,13 @@ import GemPage from './compos/pages/GemPage';
 import './styles.css';
 var auras = require('./auraStats').default;
 var clusters = require('./clusterJewels').default;
+var trees = require('./treePassives').default;
 
 class App extends Component {
   state = {
     auras,
     clusters,
+    trees,
 
     globalAuraEffect: 0,
 
@@ -137,7 +139,9 @@ class App extends Component {
                     <Route path='/aurastatcalc/tree'
                     
                       render = {(props) => (
-                        <TreePage {...props} auras={auras} />
+                        <TreePage {...props} auras={auras} 
+                          trees={trees}
+                        />
                       )}
                     />
 

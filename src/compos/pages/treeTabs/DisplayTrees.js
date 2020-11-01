@@ -4,8 +4,11 @@ import DisplayTree from './DisplayTree';
 
 export default class DisplayTrees extends Component {
     render() {
-        return (
-            <DisplayTree />
-        )
+        return this.props.trees.map((tree) => (
+            <DisplayTree 
+
+                tree={tree}
+            />
+         ));
     }
 }

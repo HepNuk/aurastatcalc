@@ -10,10 +10,7 @@ export default class DisplayClusters extends Component {
         let auraEffect = 0;
 
         this.props.clusters.forEach((cluster) => {   
-            if(cluster.special === true){ 
-
-                
-            } else {
+            if(cluster.affects !== undefined){ 
                 if( cluster.affects.length === 0 ){
                     auraEffect += (cluster.auraEffect * cluster.amount);
                 
@@ -33,7 +30,8 @@ export default class DisplayClusters extends Component {
                         }
                     }
                 }
-            }
+                
+            } 
         });
 
         return auraEffect;

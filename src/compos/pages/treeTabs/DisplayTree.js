@@ -1,25 +1,22 @@
 import React, { Component } from 'react'
 
-var tree = require('../../../treePassives').default;
-var treecluster = tree[3];
 export default class DisplayTree extends Component {
     render() {
 
-        console.log(treecluster);
 
         return (
             <div>
                 <div className='treeLabel'>
 
-                <label for={treecluster.key}>
+                <label for={this.props.tree.key}>
                     <div className='notables'>
                         <div className='notable'>
                             <img className='border' src='img/borders/notable_border.webp' />
-                            <img src={`img/tree/${treecluster.key}.png`} />
+                            <img src={`img/tree/${this.props.tree.key}.png`} />
                         </div>
                     
-                        <input type='checkbox' id={treecluster.key} />
-                        <span className='title'>{treecluster.notable.name}</span>
+                        <input type='checkbox' id={this.props.tree.key} />
+                        <span className='title'>{this.props.tree.notable.name}</span>
                     </div>
                 </label>
                 

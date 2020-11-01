@@ -327,7 +327,7 @@ body #root {
 .treeLabel .notables {
   font-size: 16px;
   line-height: 35px;
-  width: 240px;
+  width: 250px;
 }
 
 .treeLabel .notables .title {
@@ -362,7 +362,7 @@ body #root {
   position: relative;
   font-size: 14px;
   line-height: 35px;
-  width: 240px;
+  width: 250px;
 }
 
 .treeLabel .smalls .title {
