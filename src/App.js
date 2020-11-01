@@ -19,8 +19,6 @@ class App extends Component {
     clusters,
     trees,
 
-    globalAuraEffect: 0,
-
     auraEffect: {
       asc: {
         selected: 0,
@@ -30,7 +28,8 @@ class App extends Component {
       },
       tree: {
         amount: 0,
-        total: function(){return this.amount}
+        timeless: 0,
+        total: function(){ console.log('total: ', this.timeless); return (Number(this.amount+this.timeless))}
       },
       cluster: {
         amount: 0,
@@ -92,7 +91,9 @@ class App extends Component {
 
    changeGlobalAuraEffect(newAuraEffect, page){
 
-    this.setState({auraEffect: {...this.state.auraEffect, [page]: {...this.state.auraEffect[page], amount: newAuraEffect}}});
+    console.log(newAuraEffect, page);
+
+    this.setState({auraEffect: {...this.state.auraEffect, [page]: {...this.state.auraEffect[page], amount: Number(newAuraEffect)}}});
    }
 
    changeClusterAmount(newAmount, clusterIndex){
@@ -114,8 +115,30 @@ class App extends Component {
     return index;
    }
    
+   changeTreeNodes(){
+
+    let newTreeStats = [...this.state.trees];
+    //let index = trees.indexOf(tree);
+    let newAuraEffect = 0;
+
+    newTreeStats.forEach((cluster) => {
+      
+      newAuraEffect += cluster.clusterAuraEffect();
+    })
+
+    this.setState({trees: newTreeStats});
+    this.changeGlobalAuraEffect(newAuraEffect, 'tree')
+    
+   }
+
+   changeTimeless(newAuraEffect){
+
+    console.log(newAuraEffect);
+    this.setState({auraEffect: {...this.state.auraEffect, ['tree']: {...this.state.auraEffect['tree'], timeless: Number(newAuraEffect)}}});
+   }
+
   render() {
-    console.log(this.state.auras[7]);
+      console.log(this.state.trees);
       return ( 
         <section className="app">
           <div className='header'>
@@ -139,7 +162,11 @@ class App extends Component {
                     <Route path='/aurastatcalc/tree'
                     
                       render = {(props) => (
-                        <TreePage {...props} auras={auras} 
+                        <TreePage {...props} 
+
+                        changeTimeless={this.changeTimeless.bind(this)}
+                        changeTreeNodes={this.changeTreeNodes.bind(this)}
+                          auras={auras} 
                           trees={trees}
                         />
                       )}

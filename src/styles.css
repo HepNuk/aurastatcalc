@@ -397,6 +397,43 @@ body #root {
   margin-left: 85px;
 }
 
+.treeLabel .motm {
+  position: relative;
+  font-size: 12px;
+  line-height: 35px;
+  width: 250px;
+}
+
+.treeLabel .motm .title {
+  float: right;
+  margin-right: 15px;
+}
+
+.treeLabel .motmpassives {
+  position: relative;
+}
+
+.treeLabel .motmpassives .border {
+  float: left;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  z-index: 9;
+  width: 28px;
+}
+
+.treeLabel .motmpassives img {
+  position: relative;
+  border-radius: 5px;
+  width: 30px;
+  float: left;
+  margin-left: 78px;
+}
+
+.treeLabel .motmpassives input {
+  margin-left: 85px;
+}
+
 .treeLabel .disabled input[type=number] {
   border: 1px solid #777;
 }

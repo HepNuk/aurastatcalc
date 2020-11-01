@@ -6,9 +6,10 @@ export default class DisplayTrees extends Component {
     render() {
         return this.props.trees.map((tree) => (
             <DisplayTree 
-
+            changeTreeNodes={this.props.changeTreeNodes}
                 tree={tree}
             />
+               
          ));
     }
 }

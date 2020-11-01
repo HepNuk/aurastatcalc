@@ -415,6 +415,41 @@ body {
         }
     }
 
+    .motm{
+        position: relative;
+        font-size: 12px;
+        line-height: 35px;
+        width: 250px;
+        .title{
+            float: right;
+            margin-right: 15px;
+        }
+    }
+    .motmpassives{
+        
+        position: relative;
+
+        .border{
+            
+            float: left;
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            z-index: 9;
+            width: 28px;
+
+        }
+        img{
+            position: relative;
+            border-radius: 5px;
+            width: 30px;
+            float: left;
+            margin-left: 78px;
+        }
+        input{
+            margin-left: 85px;
+        }
+    }
 
 
     .disabled input[type=number] {

@@ -21,7 +21,6 @@ export default class DisplayCluster extends Component {
 
                     <div className='inputs'>
                         <input onChange={this.onChangeCluster.bind(this)} defaultValue={this.props.cluster.amount} type='number' min='0' max='80'/>
-
                     </div>
                 </div>          
             </div>
