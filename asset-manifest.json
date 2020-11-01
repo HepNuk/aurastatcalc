@@ -1,21 +1,21 @@
 {
   "files": {
     "main.css": "/aurastatcalc/static/css/main.d80b66fd.chunk.css",
-    "main.js": "/aurastatcalc/static/js/main.fe0fb6e4.chunk.js",
-    "main.js.map": "/aurastatcalc/static/js/main.fe0fb6e4.chunk.js.map",
+    "main.js": "/aurastatcalc/static/js/main.b54a868b.chunk.js",
+    "main.js.map": "/aurastatcalc/static/js/main.b54a868b.chunk.js.map",
     "runtime-main.js": "/aurastatcalc/static/js/runtime-main.e863b341.js",
     "runtime-main.js.map": "/aurastatcalc/static/js/runtime-main.e863b341.js.map",
-    "static/js/2.b9dfd043.chunk.js": "/aurastatcalc/static/js/2.b9dfd043.chunk.js",
-    "static/js/2.b9dfd043.chunk.js.map": "/aurastatcalc/static/js/2.b9dfd043.chunk.js.map",
+    "static/js/2.b20811a7.chunk.js": "/aurastatcalc/static/js/2.b20811a7.chunk.js",
+    "static/js/2.b20811a7.chunk.js.map": "/aurastatcalc/static/js/2.b20811a7.chunk.js.map",
     "index.html": "/aurastatcalc/index.html",
     "static/css/main.d80b66fd.chunk.css.map": "/aurastatcalc/static/css/main.d80b66fd.chunk.css.map",
-    "static/js/2.b9dfd043.chunk.js.LICENSE.txt": "/aurastatcalc/static/js/2.b9dfd043.chunk.js.LICENSE.txt",
+    "static/js/2.b20811a7.chunk.js.LICENSE.txt": "/aurastatcalc/static/js/2.b20811a7.chunk.js.LICENSE.txt",
     "static/media/styles.css": "/aurastatcalc/static/media/Fontin-Bold.759f6160.ttf"
   },
   "entrypoints": [
     "static/js/runtime-main.e863b341.js",
-    "static/js/2.b9dfd043.chunk.js",
+    "static/js/2.b20811a7.chunk.js",
     "static/css/main.d80b66fd.chunk.css",
-    "static/js/main.fe0fb6e4.chunk.js"
+    "static/js/main.b54a868b.chunk.js"
   ]
 }
