@@ -10,22 +10,40 @@ import GemPage from './compos/pages/GemPage';
 
 import './styles.css';
 var auras = require('./auraStats').default;
+var cluters = require('./clusterJewels').default;
 
 class App extends Component {
   state = {
     auras,
-
-    ascendancy: 0,
+    clusterJewels,
 
     globalAuraEffect: 0,
 
     auraEffect: {
-      asc: 10,
-      tree: 10,
-      cluster: 0,
-      gear: 0,
+      asc: {
+        selected: 0,
+        options: [0,10,5],
+        total: function(){ return this.options[this.selected] }
+
+      },
+      tree: {
+        sovereignty:{
+
+          small: [[0,6]],
+
+        },
+        total: function(){return 0}
+      },
+      cluster: {
+        
+        total: function(){return 0}
+      },
+      gear: {
+        
+        total: function(){return 0}
+      },
       total: function(){
-        return this.asc + this.tree + this.cluster + this.gear;
+        return this.asc.total() + this.tree.total() + this.cluster.total() + this.gear.total();
       }
     }
   }
@@ -102,7 +120,9 @@ class App extends Component {
                    <Route path='/aurastatcalc/clusters'
                       
                       render = {(props) => (
-                        <ClusterPage {...props} auras={auras} />
+                        <ClusterPage {...props} 
+                          clusterJewels={this.state.clusterJewels}
+                          auras={auras} />
                       )}
                     />
                     
