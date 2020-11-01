@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import NavBar from './compos/NavBar';
-import MainPage from './compos/MainPage';
 import OutputBox from './compos/OutputBox';
 import AscendancyPage from './compos/pages/AscendancyPage';
 import TreePage from './compos/pages/TreePage';
@@ -10,54 +10,77 @@ import GemPage from './compos/pages/GemPage';
 
 import './styles.css';
 var auras = require('./auraStats').default;
+var cluters = require('./clusterJewels').default;
 
 class App extends Component {
   state = {
     auras,
+    clusterJewels,
 
-    ascendancy: 0,
+    globalAuraEffect: 0,
 
-    globalAuraEffect: 100,
+    auraEffect: {
+      asc: {
+        selected: 0,
+        options: [0,10,5],
+        total: function(){ return this.options[this.selected] }
 
-    mainPage: {
-      pageSelected: 0,
-      pages: [
-      <AscendancyPage auras={auras}/>,
-      
-      <TreePage auras={auras}/>,
+      },
+      tree: {
+        sovereignty:{
 
-      <ClusterPage auras={auras}/>,
+          small: [[0,6]],
 
-      <GearPage auras={auras}/>,
-
-      <GemPage  changeGenoType={this.changeGenoType.bind(this)}
-                changeGenoLevel={this.changeGenoLevel.bind(this)}
-                changeAltQuality={this.changeAltQuality.bind(this)} 
-                changeQuality={this.changeQuality.bind(this)} 
-                changeLevel={this.changeLevel.bind(this)} 
-                auras={auras}/>,
-      ]
+        },
+        total: function(){return 0}
+      },
+      cluster: {
+        
+        total: function(){return 0}
+      },
+      gear: {
+        
+        total: function(){return 0}
+      },
+      total: function(){
+        return this.asc.total() + this.tree.total() + this.cluster.total() + this.gear.total();
+      }
     }
   }
 
-  changeLevel(newLevel, auraKey){
-    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], level: newLevel}} });
+  changeLevel(newLevel, auraIndex){
+
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].level = Number(newLevel);
+    this.setState({ auras: newAuraState });
+
   }
 
-  changeQuality(newQuality, auraKey){
-    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], quality: newQuality}} });
+  changeQuality(newQuality, auraIndex){
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].quality = Number(newQuality);
+    this.setState({ auras: newAuraState });
   }
 
-  changeAltQuality(newAltQuality, auraKey){
-    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], altQuality: newAltQuality}} });
+  changeAltQuality(newAltQuality, auraIndex){
+
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].altQuality = Number(newAltQuality);
+    this.setState({ auras: newAuraState });
   }
 
-  changeGenoLevel(newGenoLevel, auraKey){
-    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], generosityLevel: newGenoLevel}} });
+  changeGenoLevel(newGenoLevel, auraIndex){
+
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].generosityLevel = Number(newGenoLevel);
+    this.setState({ auras: newAuraState });
   }
 
-  changeGenoType(newGenoType, auraKey){
-    this.setState({ auras: { ...this.state.auras, [auraKey]: {...this.state.auras[auraKey], generosityType: newGenoType}} });
+  changeGenoType(newGenoType, auraIndex){
+
+    let newAuraState = [...this.state.auras];
+    newAuraState[auraIndex].generosityType = Number(newGenoType);
+    this.setState({ auras: newAuraState });
   }
 
   changePage(pageNum){
@@ -73,14 +96,93 @@ class App extends Component {
             <h1>Nuk's PoE Aura stats calculator</h1>
             <p>- Under Construction</p>
           </div>
+
+          <Router>
             <NavBar changePage={this.changePage.bind(this)} />
           <div className="content">
-            <MainPage gemLinksPage={this.state.gemLinksPage} content={this.state.mainPage} auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
-            <OutputBox auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
+
+                <div className='page main'>
+                  <Switch>
+                    <Route path='/aurastatcalc/' exact
+
+                      render = {(props) => (
+                        <AscendancyPage {...props} auras={auras} />
+                      )}
+                    />
+
+                    <Route path='/aurastatcalc/tree'
+                    
+                      render = {(props) => (
+                        <TreePage {...props} auras={auras} />
+                      )}
+                    />
+
+                   <Route path='/aurastatcalc/clusters'
+                      
+                      render = {(props) => (
+                        <ClusterPage {...props} 
+                          clusterJewels={this.state.clusterJewels}
+                          auras={auras} />
+                      )}
+                    />
+                    
+                    <Route path='/aurastatcalc/gear'
+                      
+                      render = {(props) => (
+                        <GearPage {...props} auras={auras} />
+                      )}
+                    />
+
+                    <Route path='/aurastatcalc/auras'
+                      
+                      render = {(props) => (
+                        <GemPage {...props} 
+                          changeGenoType={this.changeGenoType.bind(this)}
+                          changeGenoLevel={this.changeGenoLevel.bind(this)}
+                          changeAltQuality={this.changeAltQuality.bind(this)} 
+                          changeQuality={this.changeQuality.bind(this)} 
+                          changeLevel={this.changeLevel.bind(this)} 
+                          auras={auras} 
+                       />
+                      )}
+                    />
+            
+                  </Switch> 
+                </div>
+              
+            <OutputBox auras={this.state.auras} globalAuraEffect={this.state.auraEffect.total()} />
           </div>
+          </Router>
         </section>
     );
   }
 }
  
 export default App;
+
+/*
+<MainPage gemLinksPage={this.state.gemLinksPage} content={this.state.mainPage} auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
+*/
+
+/*
+<TreePage 
+                    auras={auras}
+                  />
+
+                  <ClusterPage 
+                    auras={auras} 
+                  />
+
+                  <GearPage 
+                    auras={auras} 
+                  />
+
+                  <GemPage  
+                    changeGenoType={this.changeGenoType.bind(this)}
+                    changeGenoLevel={this.changeGenoLevel.bind(this)}
+                    changeAltQuality={this.changeAltQuality.bind(this)} 
+                    changeQuality={this.changeQuality.bind(this)} 
+                    changeLevel={this.changeLevel.bind(this)} 
+                    auras={auras} 
+                  />
+                  */

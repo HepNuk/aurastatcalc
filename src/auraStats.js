@@ -109,7 +109,8 @@ var printPercentEffect = function(effect, value, auraEffect){
 }
 
 class Aura {
-    constructor(title, effectOfQuality, statPerQuality, numberEffects, effectOfAura) {
+    constructor(aurakey, title, effectOfQuality, statPerQuality, numberEffects, effectOfAura) {
+        this.key = aurakey;
         this.title = title;
         this.level = 0;
         this.quality = 0;
@@ -144,7 +145,6 @@ class Aura {
         this.generosityAuraEffect = function(){
 
             if(this.generosityType > 0 && this.generosityLevel > 0 ){
-                console.log(this.generosityEffect[this.generosityType][this.generosityLevel]);
                 return this.generosityEffect[this.generosityType][this.generosityLevel];
             } else return 0;
         }
@@ -204,10 +204,11 @@ AURA: new Aura(
 */
 
 
-var auras = {
+var auras = [
   //-----------------------------------------------------
   //Anger Stats
-    ANGER: new Aura(
+    new Aura(
+        'ANGER',
         //Title 
         "Anger",
         //AlternateQualityBonuses 
@@ -242,7 +243,8 @@ var auras = {
 
   //-----------------------------------------------------
   //Hatred
-    HATRED: new Aura(
+    new Aura(
+        'HATRED',
         //Title 
         'Hatred',
         //AlternateQualityBonuses 
@@ -276,7 +278,8 @@ var auras = {
     ),
   //-------------------------------
   //Wrath
-    WRATH: new Aura(
+    new Aura(
+        'WRATH',
         //Title 
         'Wrath',
         //AlternateQualityBonuses 
@@ -310,7 +313,8 @@ var auras = {
         ]
     ),
 
-    HASTE: new Aura(
+    new Aura(
+        'HASTE',
         //Title 
         'Haste',
         //AlternateQualityBonuses 
@@ -352,7 +356,8 @@ var auras = {
         ]
     ),
 
-    MALEVOLENCE: new Aura(
+    new Aura(
+        'MALEVOLENCE',
         //Title 
         'Malevolence',
         //AlternateQualityBonuses 
@@ -385,7 +390,8 @@ var auras = {
         ]
     ),  
 
-    ZEALOTRY: new Aura(
+    new Aura(
+        'ZEALOTRY',
         //Title 
         'Zealotry',
         //AlternateQualityBonuses 
@@ -418,7 +424,8 @@ var auras = {
         ]
     ),
 
-    PURITY_FIRE: new Aura(
+    new Aura(
+        'PURITY_FIRE',
         //Title 
         'Purity of Fire',
         //AlternateQualityBonuses 
@@ -451,7 +458,8 @@ var auras = {
         ]
     ),    
 
-    PURITY_ICE: new Aura(
+    new Aura(
+        'PURITY_ICE',
         //Title 
         'Purity of Ice',
         //AlternateQualityBonuses 
@@ -484,7 +492,8 @@ var auras = {
         ]
     ),
     
-    PURITY_LIGHTNING: new Aura(
+    new Aura(
+        'PURITY_LIGHTNING',
         //Title 
         'Purity of Lightning',
         //AlternateQualityBonuses 
@@ -517,7 +526,8 @@ var auras = {
         ]
     ),
 
-    PURITY_ELEMENTS: new Aura(
+    new Aura(
+        'PURITY_ELEMENTS',
         //Title 
         'Purity of Elements',
         //AlternateQualityBonuses 
@@ -543,6 +553,6 @@ var auras = {
         ]
     ),
 
-};
+    ];
 
 export default auras;
