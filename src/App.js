@@ -17,26 +17,16 @@ class App extends Component {
 
     ascendancy: 0,
 
-    globalAuraEffect: 100,
+    globalAuraEffect: 0,
 
-    mainPage: {
-      pageSelected: 0,
-      pages: [
-      <AscendancyPage auras={auras}/>,
-      
-      <TreePage auras={auras}/>,
-
-      <ClusterPage auras={auras}/>,
-
-      <GearPage auras={auras}/>,
-
-      <GemPage  changeGenoType={this.changeGenoType.bind(this)}
-                changeGenoLevel={this.changeGenoLevel.bind(this)}
-                changeAltQuality={this.changeAltQuality.bind(this)} 
-                changeQuality={this.changeQuality.bind(this)} 
-                changeLevel={this.changeLevel.bind(this)} 
-                auras={auras}/>,
-      ]
+    auraEffect: {
+      asc: 10,
+      tree: 10,
+      cluster: 0,
+      gear: 0,
+      total: function(){
+        return this.asc + this.tree + this.cluster + this.gear;
+      }
     }
   }
 
@@ -92,9 +82,7 @@ class App extends Component {
           <Router>
             <NavBar changePage={this.changePage.bind(this)} />
           <div className="content">
-            
-              
-               
+
                 <div className='page main'>
                   <Switch>
                     <Route path='/aurastatcalc/' exact
@@ -142,7 +130,7 @@ class App extends Component {
                   </Switch> 
                 </div>
               
-            <OutputBox auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
+            <OutputBox auras={this.state.auras} globalAuraEffect={this.state.auraEffect.total()} />
           </div>
           </Router>
         </section>
