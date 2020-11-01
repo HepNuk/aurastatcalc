@@ -7,7 +7,8 @@ class TreeCluster{
             tempArray.push([false]) //all small nodes grant 6% aura effect
         }
 
-        this.key = key
+        this.key = key;
+        this.name = name;
         this.notable = new Notable(name, notableAuraEffect);
         this.smallPassives = tempArray;
         this.motm = false;
@@ -43,11 +44,11 @@ class Notable{
 
 //new TreeCluster(key, name, notableAuraEffect, numSmallPassives)
 var treePassives = [
-    new TreeCluster('SOVEREIGNTY',      'Sovereinty',            10, 1),
+    new TreeCluster('SOVEREIGNTY',      'Sovereignty',            10, 1),
     new TreeCluster('LEADERSHIP',       'Leadership',            6,  1),
     new TreeCluster('INFLUENCE',        'Influence',             14, 1),
     new TreeCluster('CHARISMA',         'Charisma',              6,  0),
-    new TreeCluster('CHAMPION_CAUSE',   'Champion of the Cause', 6,  1),
+    new TreeCluster('CHAMPION_OF_THE_CAUSE',   'Champion of the Cause', 6,  1),
     new TreeCluster('DEVOTION',         'Devotion',              3,  0),
     new TreeCluster('POTENCY',          'Conqueror\'s Pontency', 3,  0)
 ]

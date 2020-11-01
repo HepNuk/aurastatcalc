@@ -246,6 +246,7 @@ body {
         margin-bottom: 5px;
         color: #bbb;
         display: block;
+        
         .aura{
             float: left;
             font-size: 16px;
@@ -290,22 +291,6 @@ body {
                 float: right;
             }
         }
-        .awakgenerosity{
-
-            float: right;
-            img{
-                border-radius: 5px;
-                width: 35px;
-                height: 35px;
-                float: left;
-                margin-right: 5px;
-            }
-
-            .geno_title{
-                
-    
-            }
-        }
 
         img{
             border-radius: 5px;
@@ -342,4 +327,121 @@ body {
             height: 27px;
         }
     }
+}
+
+.treeLabel{
+
+    float: left;
+    width: 250px;
+    border-radius: 5px;
+    background: #111;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: #bbb;
+    display: block;
+
+    
+    .notables{
+        font-size: 16px;
+        line-height: 35px;
+        width: 240px;
+        .title{
+            float: right;
+            margin-right: 15px;
+        }
+    }
+
+    .notable{
+        
+        
+        position: relative;
+
+        .border{
+            float: left;
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            z-index: 10;
+            width: 45px;
+            height: 45px;
+
+        }
+        img{
+            position: relative;
+            border-radius: 5px;
+            width: 35px;
+            height: 35px;
+            float: left;
+            margin-right: 5px;
+        }
+    }
+    
+    .smalls{
+        position: relative;
+        font-size: 14px;
+        line-height: 35px;
+        width: 240px;
+        .title{
+            float: right;
+            margin-right: 15px;
+        }
+    }
+
+    .smallpassives{
+        
+        position: relative;
+
+        .border{
+            
+            float: left;
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            z-index: 9;
+            width: 28px;
+
+        }
+        img{
+            position: relative;
+            border-radius: 5px;
+            width: 18px;
+            float: left;
+            margin-right: 5px;
+            margin-top: 8px;
+            margin-left: 85px;
+        }
+        input{
+            margin-left: 85px;
+        }
+    }
+
+
+
+    .disabled input[type=number] {
+        border: 1px solid #777;
+    
+    }
+
+    input[type=number]{
+        border: 1px solid #ccc;
+        background: #222;
+        font-size: 14px;
+        color: #fff;
+        line-height: 25px;
+        padding: 0 2px;
+        width: 50px;
+        margin-right: 3px;
+    }
+    select{
+        border: 1px solid #ccc;
+        background: #222;
+        font-size: 14px;
+        color: #fff;
+        line-height: 25px;
+        padding: 2px;
+        width: 85px;
+        margin-right: 3px;
+        height: 27px;
+    }
+    
 }
