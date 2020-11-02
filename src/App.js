@@ -91,8 +91,6 @@ class App extends Component {
 
    changeGlobalAuraEffect(newAuraEffect, page){
 
-    console.log(newAuraEffect, page);
-
     this.setState({auraEffect: {...this.state.auraEffect, [page]: {...this.state.auraEffect[page], amount: Number(newAuraEffect)}}});
    }
 
@@ -138,7 +136,7 @@ class App extends Component {
    }
 
   render() {
-      console.log(this.state.trees);
+      console.log(this.state.auras);
       return ( 
         <section className="app">
           <div className='header'>

@@ -109,7 +109,7 @@ var printPercentEffect = function(effect, value, auraEffect){
 }
 
 class Aura {
-    constructor(aurakey, title, effectOfQuality, statPerQuality, numberEffects, effectOfAura) {
+    constructor(aurakey, title, effectOfQuality, statPerQuality, numberEffects, effectOfAura, special) {
         this.key = aurakey;
         this.title = title;
         this.level = 0;
@@ -120,6 +120,7 @@ class Aura {
         this.statPerQuality = statPerQuality;
         this.numberEffects = numberEffects;
         this.effectOfAura = effectOfAura;
+        this.special = special | false;
 
         this.generosityLevel = 0;
         this.generosityType = 0;
@@ -175,33 +176,6 @@ class Aura {
         };
     }
 }
-
-/* Template for new Aura.
-
-AURA: new Aura(
-    //Title 
-    '',
-    //AlternateQualityBonuses 
-    [
-        [''],
-        [''],
-        [''],
-    ],
-    //Values Per Quality of the diffrent alt Qualities
-    [0, 0, 0],
-    //Values at each level for the aura
-    [
-        [],
-        [],
-    ],
-    //Aura Bonuses
-    [
-        [''],
-        [''],
-    ]
-),    
-
-*/
 
 
 var auras = [
@@ -553,6 +527,320 @@ var auras = [
         ]
     ),
 
+    new Aura(
+        //KEY
+        'WAR_BANNER',
+        //Title 
+        'War Banner',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% increased Accuracy Rating'],
+            [''],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0.3, 0],
+        //Values at each level for the aura
+        [
+            [   0,
+                15, 15, 15, 16, 16, 16, 17, 17, 17, 18, 
+                18, 18, 19, 19, 19, 20, 20, 20, 21, 21, 
+                21, 22, 22, 22, 23, 23, 23, 24, 24, 24, 
+                25, 25, 25, 26, 26, 26, 27, 27, 27, 28
+            ]
+        ],
+        //Aura Bonuses
+        [
+            ['% increased Accuracy Rating'],
+        ]
+    ),  
+
+    new Aura(
+        //Key
+        'DREAD_BANNER',
+        //Title 
+        'Dread Banner',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            [''],
+            ['% chance to Impale Enemies on Hit with Attacks'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0, 0.25],
+        //Values at each level for the aura
+        [
+            [ 0,
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 
+            ],
+            [   0,
+                0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 
+                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 
+                20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 
+                30, 31, 32, 33, 34, 35, 36, 37, 38, 39
+            ]
+        ],
+        //Aura Bonuses
+        [
+            ['% chance to Impale Enemies on Hit with Attacks'], 
+            ['% increased Impale Effect'],
+        ]
+    ),    
+
+    new Aura(
+        //Key
+        'DISCIPLINE',
+        //Title 
+        'Discipline',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% increased Damage while on Full Energy Shield'],
+            ['% increased Energy Shield Recharge rate'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0.5, 2],
+        //Values at each level for the aura
+        [
+            [   0,
+                60, 69, 76, 85, 94, 103, 114, 124, 136, 143, 
+                147, 156, 165, 171, 179, 185, 192, 200, 205, 217, 
+                221, 231, 238, 250, 262, 269, 284, 294, 304, 314, 
+                314, 323, 323, 332, 332, 340, 340, 348, 348, 356
+            ],
+            [
+                0,
+                30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 
+                30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 
+                30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 
+                30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 
+            ]
+        ],
+        //Aura Bonuses
+        [
+            ['+',' to maximum Energy shield'],
+            ['% increased Energy Shield Recharge rate']
+        ]
+    ),    
+
+    new Aura(
+        //Key
+        'GRACE',
+        //Title 
+        'Grace',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% chance to avoid Elemental Ailments'],
+            ['% chance to Avoid Chaos Damage from Hits'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0.5, 0.2],
+        //Values at each level for the aura
+        [
+            [   0,
+                227, 271, 322, 379, 444, 528, 621, 722, 845, 940, 
+                1043, 1155, 1283, 1413, 1567, 1732, 1914, 2115, 2335, 2575, 
+                2700, 2835, 2979, 3124, 3279, 3444, 3611, 3795, 3982, 4179, 
+                4282, 4386, 4494, 4603, 4716, 4830, 4948, 5067, 5190, 5314     
+            ],
+        ],
+        //Aura Bonuses
+        [
+            ['+', ' Evasion rating'],
+        ]
+    ),  
+
+    new Aura(
+        //Key
+        'DETERMINATION',
+        //Title 
+        'Determination',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% chance to Avoid being Stunned'],
+            ['% of Evasion Rating as Extra Armour'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 1, 0.5],
+        //Values at each level for the aura
+        [
+            [   0,
+                32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 
+                52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 
+                61, 62, 62, 63, 63, 64, 64, 65, 65, 66
+            ],
+        ],
+        //Aura Bonuses
+        [
+            ['% more Armour'],
+        ]
+    ),  
+
+    new Aura(
+        //Key
+        'CLARITY',
+        //Title 
+        'Clarity',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['% increased Mana Recovery from Flasks'],
+            ['% increased Damage while on Full Mana'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0.5, 1],
+        //Values at each level for the aura
+        [
+            [   0,
+                2.9,   4.4,  6.5, 8.4,  10.4, 12.5, 14.5,   16, 17.5,   19, 
+                20.5,   22, 23.5,  25,  26.5,   28, 29.5,   31,   32,   33, 
+                34,     35,   36,  37,    38,   39,   40,   41,   42, 43.1, 
+                43.6, 44.1, 44.6, 45.1, 45.6, 46.1, 46.6, 47.1, 47.6, 48.1
+            ],
+        ],
+        //Aura Bonuses
+        [
+            ['+', ' Mana Regeneration'],
+        ]
+    ),    
+
+    new Aura(
+        //Key
+        'PRECISION',
+        //Title 
+        'Precision',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            [''],
+            ['% increased Damage'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0, 0.5],
+        //Values at each level for the aura
+        [
+            [
+                  93,  128,  162,  193,  223,  276,  305,  332,  359,  385, 
+                 444,  469,  493,  516,  539,  606,  630,  653,  677,  701, 
+                 778,  804,  831,  857,  883,  972, 1000, 1029, 1058, 1087, 
+                1172, 1187, 1203, 1218, 1233, 1324, 1340, 1357, 1374, 1390
+            ],
+            [   0,
+                20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 
+                40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 
+                60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 
+                79, 80, 81, 82, 83, 84, 85, 86, 87, 88
+            ]
+        ],
+        //Aura Bonuses
+        [
+            ['+', ' to Accuracy Rating'],
+            ['% increased Critical Strike Chance']
+        ]
+    ),  
+    
+    new Aura(
+        //Key
+        'VITALITY',
+        //Title 
+        'Vitality',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            ['Leech ', ' % of Physical Attack Damage as Life'],
+            ['% increased Damage while on Full Life'],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0.02, 1],
+        //Values at each level for the aura
+        [
+            [   0,
+                15, 26.5, 42, 57.5, 73, 88.4, 103.9, 115.5, 127.1, 138.8, 
+                150.2, 161.9, 173.5, 185.1, 196.8, 208.2, 219.9, 231.5, 239.2, 247, 
+                254.8, 262.5, 270.1, 277.9, 285.6, 293.4, 301.1, 308.9, 316.6, 324.4, 
+                328.1, 332, 335.9, 339.8, 343.6, 347.5, 351.4, 355.2, 359.1, 363
+            ],
+        ],
+        //Aura Bonuses
+        [
+            ['Regenerate ', ' Life per second'],
+        ]
+    ),
+    
+
+    new Aura(
+        //Key
+        'ENVY',
+        //Title 
+        'Envy',
+        //AlternateQualityBonuses 
+        [
+            [''],
+            [''],
+            [''],
+        ],
+        //Values Per Quality of the diffrent alt Qualities
+        [0, 0, 0],
+        //Values at each level for the aura
+        [
+            [   [0,0],
+                [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], 
+                [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], 
+                [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], 
+                [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141],       
+            ],
+            [   [0,0]
+                [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], 
+                [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], 
+                [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], 
+                [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], 
+            ]
+        ],
+        //Aura Bonuses
+        [
+            ['Adds ',' to ', ' additional Chaos Damage with Attacks'],
+            ['Adds ',' to ', ' additional Chaos Damage with Spells'],
+        ]
+    ),  
+    
+
     ];
+
+    
+/* Template for new Aura.
+
+new Aura(
+    //Key
+    '',
+    //Title 
+    '',
+    //AlternateQualityBonuses 
+    [
+        [''],
+        [''],
+        [''],
+    ],
+    //Values Per Quality of the diffrent alt Qualities
+    [0, 0, 0],
+    //Values at each level for the aura
+    [
+        [
+
+        ],
+    ],
+    //Aura Bonuses
+    [
+        [''],
+    ]
+),    
+
+*/
+
 
 export default auras;
