@@ -460,4 +460,97 @@ body #root {
   margin-right: 3px;
   height: 27px;
 }
+
+.armour_grps {
+  width: 100%;
+  margin: 35px auto;
+}
+
+.armour_grps h2 {
+  font-size: 20px;
+}
+
+.armour_grps h3 {
+  font-size: 16px;
+}
+
+.armour_grps hr {
+  width: 100%;
+  clear: both;
+}
+
+.armour_grps br {
+  clear: both;
+}
+
+.armours {
+  float: left;
+  margin: auto;
+  width: 24%;
+  border-radius: 5px;
+  background: #111;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  color: #bbb;
+  display: block;
+}
+
+.armours .armour {
+  float: left;
+  font-size: 16px;
+  line-height: 35px;
+  width: 100%;
+}
+
+.armours .inputs {
+  float: right;
+}
+
+.armours .title {
+  font-size: 16px;
+}
+
+.armours .title-corruption {
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.armours .details {
+  font-size: 14px;
+}
+
+.armours img {
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  float: left;
+  margin-right: 5px;
+}
+
+.armours .disabled input[type=number] {
+  border: 1px solid #777;
+}
+
+.armours input[type=number] {
+  border: 1px solid #ccc;
+  background: #222;
+  font-size: 14px;
+  color: #fff;
+  line-height: 25px;
+  padding: 0 2px;
+  width: 60px;
+  margin-right: 3px;
+}
+
+.armours select {
+  border: 1px solid #ccc;
+  background: #222;
+  font-size: 14px;
+  color: #fff;
+  line-height: 25px;
+  padding: 2px;
+  width: 85px;
+  margin-right: 3px;
+  height: 27px;
+}
 /*# sourceMappingURL=styles.css.map */

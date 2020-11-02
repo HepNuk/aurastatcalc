@@ -18,7 +18,7 @@ This app allows a user to input diffrent settings matching his Gear/PassiveTree/
 
 - The current styling is temporary and I will work more on it once the app is fully functional. 
 
-## Todos
+## Todos :
 - [x] ~~Basic Layout~~
 - [x] ~~Basic Styling~~
 - [x] ~~Tabbed Pages~~

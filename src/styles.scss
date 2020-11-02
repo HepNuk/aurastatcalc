@@ -480,3 +480,99 @@ body {
     }
     
 }
+
+.armour_grps{
+
+    width: 100%;
+    margin: 35px auto;
+    
+    h2{
+        font-size: 20px;
+    }
+    h3{
+        font-size: 16px;
+    }
+    hr{
+        width: 100%;
+        clear: both;
+    }
+    br{
+        clear: both;
+    }
+}
+
+.armours{
+
+    float: left;
+    margin: auto;
+    width: 24%;
+    border-radius: 5px;
+    background: #111;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    color: #bbb;
+    display: block;
+    
+    .armour{
+        
+        float: left;
+        font-size: 16px;
+        line-height: 35px;
+        width: 100%;
+    }
+
+    .inputs{
+        float: right;
+    }
+
+
+    .title{
+        
+        font-size: 16px;
+    }
+
+    .title-corruption{
+        margin-left: 5px;
+        font-size: 16px;
+    }
+
+    .details{
+        font-size: 14px;
+    }
+
+    img{
+        border-radius: 5px;
+        width: 35px;
+        height: 35px;
+        float: left;
+        margin-right: 5px;
+    }
+
+    .disabled input[type=number] {
+        border: 1px solid #777;
+    
+    }
+
+    input[type=number]{
+        border: 1px solid #ccc;
+        background: #222;
+        font-size: 14px;
+        color: #fff;
+        line-height: 25px;
+        padding: 0 2px;
+        width: 60px;
+        margin-right: 3px;
+    }
+    select{
+        border: 1px solid #ccc;
+        background: #222;
+        font-size: 14px;
+        color: #fff;
+        line-height: 25px;
+        padding: 2px;
+        width: 85px;
+        margin-right: 3px;
+        height: 27px;
+    }
+
+}
