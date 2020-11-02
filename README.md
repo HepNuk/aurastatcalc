@@ -12,10 +12,10 @@ This app allows a user to input diffrent settings matching his Gear/PassiveTree/
 
 ## Notes :
 
-- This is a passion project to help me learn react and javascript more detail. 
+- This is a passion project to help me learn [React](https://reactjs.org/) and Javascript more detail (as well as CSS/HTML). 
 
-- The code is messy and can be improved, will work on that once I have finished all the functionalities.
+- This is also to ease my and every other aurabot's time calculating how much damage they provide as well as an easier way to min max gear.
 
-- The current styling is temporary and will work more on it once app is finished. 
+- The code is messy and can be improved and less cluttered, will work on that once I have finished all the functionalities.
 
-## 
+- The current styling is temporary and I will work more on it once the app is fully functional. 
