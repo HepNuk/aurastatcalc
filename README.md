@@ -32,3 +32,8 @@ This app allows a user to input diffrent settings matching his Gear/PassiveTree/
 
 ##
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- "react" ver 17.0.1
+- "react-dom" ver 17.0.1
+- "react-router-dom" ver 5.2.0
+- "react-scripts" ver 4.0.0
+- "web-vitals": ver 0.2.4
