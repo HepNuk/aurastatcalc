@@ -18,6 +18,33 @@ This app allows a user to input diffrent settings matching his Gear/PassiveTree/
 
 - The current styling is temporary and I will work more on it once the app is fully functional. 
 
+## Todos
+- [x] Basic Layout
+- [x] Basic Styling
+- [x] Tabbed Pages
+- [x] Output Section
+- [x] Structure to store all Auras
+- [x] Printing Auras to Output 
+- [x] Print Auras based on Aura Effect
+- [x] Copy to clipboard option
+- [x] Auras Tab : (Outputting all Auras to page)
+- [x] Auras Tab : (Changes settings are reflected in Output)
+- [x] Clusters Tab : (Outputting all Diffrent Cluster nodes)
+- [x] Clusters Tab : (Changes settings are reflected in Output)
+- [x] Tree Tab : (Working Structure to store Tree cluster nodes/notables)
+- [x] Tree Tab : (Outputing Said structure to Tree Tab)
+- [x] Tree Tab : (Changing settings are reflected in Ouput)
+- [x] Tree Tab : (Might of the Meek Support)
+- [ ] Gear Tab : (Outputing all option for each gear slot)
+- [ ] Gear Tab : (Changes settings are reflected in Output)
+- [ ] Gear Tab : ('Auras from skills grant X% Damage' mod working)
+- [ ] Ascendancy Tab : (Working Ascendancy Tab and Data Structure)
+- [ ] Ascendancy Tab : (Fit in Tree Tab? -- to see)
+- [ ] Testing for bugs
+- [ ] Final Styling and Page Layout
+- [ ] Code clean up and optimizations (Using what I learned along the way to improve older code)
+
+
 ## Feature Request ? Found a bug?
 
 - If you have a Feature or an idea of something youd like to see added creat a new Issue and name it [Feature] XYZ
