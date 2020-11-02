@@ -167,6 +167,7 @@ class App extends Component {
                         changeTimeless={this.changeTimeless.bind(this)}
                         changeTreeNodes={this.changeTreeNodes.bind(this)}
                           auras={auras} 
+                          timeless={this.state.auraEffect.tree.timeless}
                           trees={trees}
                         />
                       )}
@@ -218,30 +219,3 @@ class App extends Component {
 }
  
 export default App;
-
-/*
-<MainPage gemLinksPage={this.state.gemLinksPage} content={this.state.mainPage} auras={this.state.auras} globalAuraEffect={this.state.globalAuraEffect} />
-*/
-
-/*
-<TreePage 
-                    auras={auras}
-                  />
-
-                  <ClusterPage 
-                    auras={auras} 
-                  />
-
-                  <GearPage 
-                    auras={auras} 
-                  />
-
-                  <GemPage  
-                    changeGenoType={this.changeGenoType.bind(this)}
-                    changeGenoLevel={this.changeGenoLevel.bind(this)}
-                    changeAltQuality={this.changeAltQuality.bind(this)} 
-                    changeQuality={this.changeQuality.bind(this)} 
-                    changeLevel={this.changeLevel.bind(this)} 
-                    auras={auras} 
-                  />
-                  */
