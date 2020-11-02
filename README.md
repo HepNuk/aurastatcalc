@@ -1,6 +1,6 @@
 # Aurabot state calculator
 
-You can find a link to a live version of app at [Here](https://hepnuk.github.io/aurastatcalc/)
+You can find a link to the live version of app at [Here](https://hepnuk.github.io/aurastatcalc/) [Still a WIP]
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -11,3 +11,5 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - The code is messy and can be improved, will work on that once I have finished all the functionalities.
 
 - The current styling is temporary and will work more on it once app is finished. 
+
+## 
