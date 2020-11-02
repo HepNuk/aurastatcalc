@@ -19,3 +19,15 @@ This app allows a user to input diffrent settings matching his Gear/PassiveTree/
 - The code is messy and can be improved and less cluttered, will work on that once I have finished all the functionalities.
 
 - The current styling is temporary and I will work more on it once the app is fully functional. 
+
+## Feature Request ? Found a bug?
+
+- If you have a Feature or an idea of something youd like to see added creat a new Issue and name it [Feature] XYZ
+
+- Found an issue? creat a new Issue and name it [Issue] XYZ
+
+### Links
+
+- [Aurabot Guide](https://www.pathofexile.com/forum/view-thread/2819938)
+
+- [PoE Profile](https://www.pathofexile.com/account/view-profile/_Nuk)
