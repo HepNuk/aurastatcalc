@@ -28,88 +28,23 @@
  * printQuality(auraEffect){}: takes in the GlobalAuraEffect and returns an Array with all the bonus given by the Auras Quality
  */
 
-var auraEffectCalc = function(value, auraPercent){ 
-    let auraMultiplier = ((auraPercent/100+1)); 
+var calcStatFloored = function(value, auraEffect){ 
+    let auraMultiplier = ((auraEffect/100+1)); 
 
     return Math.floor(value * auraMultiplier);
 
 }
 
-var printQualityEffect = function(effectOfQuality, statPerQuality, quality, auraEffect){
+var calcStat = function(value, auraEffect){ 
 
-    let tempArray = [];
-        if (effectOfQuality.length === 1)
-            tempArray.push(printPercentEffect(effectOfQuality, statPerQuality*quality, auraEffect));
-        
-        else if (effectOfQuality.length === 2)
-            
-            tempArray.push(printGainEffect(effectOfQuality, statPerQuality*quality, auraEffect));
-        
-        else if (effectOfQuality.length === 3)
-            tempArray.push(printAddsEffect(effectOfQuality, statPerQuality*quality, auraEffect));
+    let auraMultiplier = ((auraEffect/100+1)); 
 
-
-    return tempArray;
+    return Math.floor((value * auraMultiplier)*100)/100; //round down to 2 decimals
 }
 
-var printAuraEffect = function(effectOfAura, numberEffects, level, auraEffect){
-
-    let tempArray = [];
-    for (let i = 0; i < effectOfAura.length; i++){
-        if (effectOfAura[i].length === 1)
-            tempArray.push(printPercentEffect(effectOfAura[i], numberEffects[i][level], auraEffect));
-        
-        else if (effectOfAura[i].length === 2)
-            
-            tempArray.push(printGainEffect(effectOfAura[i], numberEffects[i][level], auraEffect));
-        
-        else if (effectOfAura[i].length === 3)
-            tempArray.push(printAddsEffect(effectOfAura[i], numberEffects[i][level], auraEffect));
-
-    }
-
-    return tempArray;
-}
-/*
-    Prints Adds type Aura Effects
-
-    examples: effect -> Array [Adds, to, Something]
-              minToMax -> Array [min, max]
-              
-              returns calculated values based on aura effect in format
-
-              Adds min to max Something     
-*/
-var printAddsEffect = function (effect, minToMax, auraEffect) {
-
-    //let auraEffectMultiplier = Math.floor((auraEffect/100)+1);
-
-    let min = auraEffectCalc(minToMax[0], auraEffect);
-    let max = auraEffectCalc(minToMax[1], auraEffect);
-
-    return effect[0] + min + effect[1] + max + effect[2];
-};
-
-//print Text Value Text Effects 
-//Example: Gain X Physical as...
-var printGainEffect = function (effect, value, auraEffect){
-
-    let newValue = auraEffectCalc(value, auraEffect);
-
-    return effect[0] + newValue + effect[1];
-}
-
-//print Value Text Effects
-//Example: X% more damage
-var printPercentEffect = function(effect, value, auraEffect){
-
-    let newValue = auraEffectCalc(value, auraEffect);
-
-    return newValue + effect;
-}
 
 class Aura {
-    constructor(aurakey, title, effectOfQuality, statPerQuality, numberEffects, effectOfAura, special) {
+    constructor(aurakey, title, effectOfQuality, statPerQuality, effectAtLevel, effectOfAura, printEffect, special, buff) {
         this.key = aurakey;
         this.title = title;
         this.level = 0;
@@ -118,9 +53,10 @@ class Aura {
         this.specificAuraEffect = 0;
         this.effectOfQuality = effectOfQuality;
         this.statPerQuality = statPerQuality;
-        this.numberEffects = numberEffects;
+        this.effectAtLevel = effectAtLevel;
         this.effectOfAura = effectOfAura;
-        this.special = special | false;
+        this.special = false || special;
+        this.buff = false || buff;
 
         this.generosityLevel = 0;
         this.generosityType = 0;
@@ -150,30 +86,45 @@ class Aura {
             } else return 0;
         }
 
-        this.printEffect = function (auraEffect) {
-            let tempArray = [];
-            if (this.level !== 0 && this.level <= 40) {
-                tempArray = printAuraEffect(this.effectOfAura, this.numberEffects, this.level, 
-                                                (this.specificAuraEffect + auraEffect + this.generosityAuraEffect()));
-                return tempArray;
+        this.getTotalAuraEffect = function(globalAuraEffect){
+            if (!(this.buff === true))
+                return this.specificAuraEffect + this.generosityAuraEffect() + globalAuraEffect;
+            else return 0;
+        }
 
-            } else
-                return [''];
+        this.printEffect = printEffect || function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    if(this.effectAtLevel[i][0].length == 2){
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
+                        tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
+                    } else {
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level], auraEffect));
+                    }
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality !== 0){
+                    tempString = this.effectOfQuality[this.altQuality]
+                    tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+    
+                    finaleAuraBonuses.push(tempString);
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
 
-        };
 
-        this.printQuality = function (auraEffect) {
-            let tempArray = [];
-            if (this.altQuality !== 0 && this.quality !== 0) {
-                tempArray = printQualityEffect(this.effectOfQuality[this.altQuality], 
-                                                this.statPerQuality[this.altQuality],  this.quality, 
-                                                (this.specificAuraEffect + auraEffect +  this.generosityAuraEffect()));
-                return tempArray;
 
-            } else
-                return [''];
-
-        };
     }
 }
 
@@ -187,9 +138,9 @@ var auras = [
         "Anger",
         //AlternateQualityBonuses 
         [
-            [""],
-            ["% increased Burning Damage"],
-            ["% increased Movement Speed"],
+            "",
+            "##% increased Burning Damage",
+            "##% increased Movement Speed",
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 1, 0.25],
@@ -210,9 +161,10 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ["Adds ", " to ", " Fire Damage to Attacks"],
-            ["Adds ", " to ", " Fire Damage to Spells"],
-        ]
+            "Adds ## to $$ Fire Damage to Attacks",
+            "Adds ## to $$ Fire Damage to Spells",
+        ],
+
     ),
 
   //-----------------------------------------------------
@@ -223,9 +175,9 @@ var auras = [
         'Hatred',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% increased Chill and Freeze Duration'],
-            ['% increased Movement Speed while on Chilled Ground'],
+            '',
+            '##% increased Chill and Freeze Duration',
+            '##% increased Movement Speed while on Chilled Ground',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 1, 1],
@@ -246,8 +198,8 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['Gain ', ' of Physical Damage as Extra Cold Damage'],
-            ['% more Cold Dmage'],
+            'Gain ## of Physical Damage as Extra Cold Damage',
+            '##% more Cold Dmage',
         ]
     ),
   //-------------------------------
@@ -258,12 +210,10 @@ var auras = [
         'Wrath',
         //AlternateQualityBonuses 
         [
-            [' '],
-            [' '],
-            [' '],
+            '', '', ''
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0, 0], 
+        [0, 0.25, 0], 
         //Values at each level for the aura
         [
             [   [0, 0], 
@@ -282,9 +232,44 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['Adds ', ' to ', ' Lightning Damage to Attacks'],
-            ['% more Lightning Damage with spells'],
-        ]
+            'Adds ## to $$ Lightning Damage to Attacks',
+            '##% more Lightning Damage with spells',
+        ],
+
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            
+
+            let finaleAuraBonuses = [];
+            
+            if(this.altQuality === 1 && this.quality){
+                let incEffect = Math.floor(this.statPerQuality[this.altQuality] * this.quality);
+                if(incEffect >= 1){
+                    auraEffect += incEffect;
+                    finaleAuraBonuses.push(`(Has ${incEffect}% increassed effect from Quality)`)
+                }
+            }
+
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    if(this.effectAtLevel[i][0].length == 2){
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
+                        tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
+                    } else {
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level], auraEffect));
+                    }
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
+
     ),
 
     new Aura(
@@ -293,10 +278,10 @@ var auras = [
         'Haste',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% increased Totem Placement speed'],
-            ['% increased Projectile Speed'],
-            ['Buffs on You expire ', '% faster']
+            '',
+            '##% increased Totem Placement speed',
+            '##% increased Projectile Speed',
+            'Buffs on You expire ##% faster'
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0.5, 0.5, 1],
@@ -324,9 +309,9 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['% increased Attack Speed'],
-            ['% increased Cast Speed'],
-            ['% increased Movement Speed']
+            '##% increased Attack Speed',
+            '##% increased Cast Speed',
+            '##% increased Movement Speed'
         ]
     ),
 
@@ -336,9 +321,9 @@ var auras = [
         'Malevolence',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% increased Skill Effect Duration'],
-            ['% increased Damage with Ailments'],
+            '',
+            '##% increased Skill Effect Duration',
+            '##% increased Damage with Ailments',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0.5, 0.5],
@@ -359,9 +344,43 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['% more Damage over Time'],
-            ['% increased Skill Effect Duration'],
-        ]
+            '##% more Damage over Time',
+            '##% increased Skill Effect Duration',
+        ],
+
+        //Malevolances 2nd quality effect is addative to its own effect before any scaling.
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    
+                    if(i === 1 && this.altQuality === 1) 
+                        tempString = tempString.replace('##', calcStatFloored((this.effectAtLevel[i][this.level] + 
+                                                                                (this.statPerQuality[this.altQuality] * 
+                                                                                    this.quality)), auraEffect));
+                    else 
+                        tempString = tempString.replace('##', calcStatFloored((this.effectAtLevel[i][this.level]), auraEffect));
+
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality === 2){
+                    tempString = this.effectOfQuality[this.altQuality]
+                    tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+    
+                    finaleAuraBonuses.push(tempString);
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
     ),  
 
     new Aura(
@@ -370,9 +389,9 @@ var auras = [
         'Zealotry',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% to Critical Strike Multiplier'],
-            ['% of Life per second'],
+            '',
+            '##% to Critical Strike Multiplier',
+            '##% of Life per second',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0.25, 0.02],
@@ -393,9 +412,41 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['% more Spell Damage'],
-            ['% increased Spell Critical Strike Chance'],
-        ]
+            '##% more Spell Damage',
+            '##% increased Spell Critical Strike Chance',
+        ],
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    
+                    if(i === 1 && this.altQuality === 1) 
+                        tempString = tempString.replace('##', calcStatFloored((this.effectAtLevel[i][this.level] + 
+                                                                                (this.statPerQuality[this.altQuality] * 
+                                                                                    this.quality)), auraEffect));
+                    else 
+                        tempString = tempString.replace('##', calcStatFloored((this.effectAtLevel[i][this.level]), auraEffect));
+
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality === 2){
+                    tempString = this.effectOfQuality[this.altQuality]
+                    tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+    
+                    finaleAuraBonuses.push(tempString);
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
     ),
 
     new Aura(
@@ -404,9 +455,9 @@ var auras = [
         'Purity of Fire',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% chance to avoid being Ignited'],
-            ['Damage Penetrates ', '% Fire Resistance'],
+            '',
+            '##% chance to avoid being Ignited',
+            'Damage Penetrates ##% Fire Resistance',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 1, 0.2],
@@ -427,8 +478,8 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['+', '% to maximum Fire Resistance'],
-            ['+', '% to Fire Resistance'],
+            '+##% to maximum Fire Resistance',
+            '+##% to Fire Resistance',
         ]
     ),    
 
@@ -438,9 +489,9 @@ var auras = [
         'Purity of Ice',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% chance to avoid being Frozen'],
-            ['Damage Penetrates ', '% Cold Resistance'],
+            '',
+            '##% chance to avoid being Frozen',
+            'Damage Penetrates ##% Cold Resistance',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 1, 0.2],
@@ -461,8 +512,8 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['+', '% to maximum Cold Resistance'],
-            ['+', '% to Cold Resistance'],
+            '+##% to maximum Cold Resistance',
+            '+##% to Cold Resistance',
         ]
     ),
     
@@ -472,9 +523,9 @@ var auras = [
         'Purity of Lightning',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% chance to avoid being Frozen'],
-            ['Damage Penetrates ', '% Lightning Resistance'],
+            '',
+            '##% chance to avoid being Frozen',
+            'Damage Penetrates ##% Lightning Resistance',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 1, 0.2],
@@ -495,8 +546,8 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['+', '% to maximum Lightning Resistance'],
-            ['+', '% to Lightning Resistance'],
+            '+##% to maximum Lightning Resistance',
+            '+##% to Lightning Resistance',
         ]
     ),
 
@@ -506,9 +557,9 @@ var auras = [
         'Purity of Elements',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% chance to avoid Elemental Ailments'],
-            ['Damage Penetrates ', '% Elemental Resistance'],
+            '',
+            '##% chance to avoid Elemental Ailments',
+            'Damage Penetrates ##% Elemental Resistance',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0.5, 0.2],
@@ -523,7 +574,7 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['+', '% to all Elemental Resistances']
+            '+##% to all Elemental Resistances'
         ]
     ),
 
@@ -534,12 +585,12 @@ var auras = [
         'War Banner',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% increased Accuracy Rating'],
-            [''],
+            '',
+            '##% increased Accuracy Rating',
+            '',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.3, 0],
+        [0.5, 0.3, 0],
         //Values at each level for the aura
         [
             [   0,
@@ -547,12 +598,57 @@ var auras = [
                 18, 18, 19, 19, 19, 20, 20, 20, 21, 21, 
                 21, 22, 22, 22, 23, 23, 23, 24, 24, 24, 
                 25, 25, 25, 26, 26, 26, 27, 27, 27, 28
+            ],
+            [   0,
+                8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 
+                10, 10, 10, 10, 10, 11, 11, 11, 11, 11, 
+                12, 12, 12, 12, 12, 13, 13, 13, 13, 13, 
+                14, 14, 14, 14, 14, 14, 14, 14, 14, 14
             ]
         ],
         //Aura Bonuses
         [
-            ['% increased Accuracy Rating'],
-        ]
+            '##% increased Accuracy Rating',
+            'Nearby Enemies take ##% increased Physical Damage'
+        ],
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+
+            if(this.altQuality === 0 && this.quality){
+                let incEffect = Math.floor(this.statPerQuality[this.altQuality] * this.quality);
+                if(incEffect >= 1){
+                    auraEffect += incEffect;
+                    finaleAuraBonuses.push(`(Has ${incEffect}% increassed effect from Quality)`)
+                }
+            }
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    if(this.effectAtLevel[i][0].length == 2){
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
+                        tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
+                    } else {
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level], auraEffect));
+                    }
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality !== 0){
+                    tempString = this.effectOfQuality[this.altQuality]
+                    tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+    
+                    finaleAuraBonuses.push(tempString);
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
     ),  
 
     new Aura(
@@ -562,12 +658,12 @@ var auras = [
         'Dread Banner',
         //AlternateQualityBonuses 
         [
-            [''],
-            [''],
-            ['% chance to Impale Enemies on Hit with Attacks'],
+            '',
+            'Nearby Enemies deal ##% less Damage',
+            '##% chance to Impale Enemies on Hit with Attacks',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0, 0.25],
+        [0.5, 0.1, 0.25],
         //Values at each level for the aura
         [
             [ 0,
@@ -585,9 +681,47 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['% chance to Impale Enemies on Hit with Attacks'], 
-            ['% increased Impale Effect'],
-        ]
+            '##% chance to Impale Enemies on Hit with Attacks', 
+            '##% increased Impale Effect',
+        ],
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+
+            if(this.altQuality === 0 && this.quality){
+                let incEffect = Math.floor(this.statPerQuality[this.altQuality] * this.quality);
+                if(incEffect >= 1){
+                    auraEffect += incEffect;
+                    finaleAuraBonuses.push(`(Has ${incEffect}% increassed effect from Quality)`)
+                }
+            }
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    if(this.effectAtLevel[i][0].length == 2){
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
+                        tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
+                    } else {
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level], auraEffect));
+                    }
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality !== 0){
+                    tempString = this.effectOfQuality[this.altQuality]
+                    tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+    
+                    finaleAuraBonuses.push(tempString);
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
     ),    
 
     new Aura(
@@ -597,12 +731,12 @@ var auras = [
         'Discipline',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% increased Damage while on Full Energy Shield'],
-            ['% increased Energy Shield Recharge rate'],
+            '',
+            '##% increased Damage while on Full Energy Shield',
+            ['##% increased Energy Shield Recharge rate', '##% slower start of Energy Shield Recharge']
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.5, 2],
+        [0, 0.5, [2, 1.5]],
         //Values at each level for the aura
         [
             [   0,
@@ -621,9 +755,49 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['+',' to maximum Energy shield'],
-            ['% increased Energy Shield Recharge rate']
-        ]
+            '+## to maximum Energy shield',
+            '##% increased Energy Shield Recharge rate'
+        ],
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    if(this.effectAtLevel[i][0].length == 2){
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
+                        tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
+                    } else {
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level], auraEffect));
+                    }
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality !== 0){
+
+                    
+                    if (this.effectOfQuality[this.altQuality].length === 2){
+
+                        for (let i = 0; i < this.effectOfQuality[this.altQuality].length; i++){
+                            tempString = this.effectOfQuality[this.altQuality][i]
+                            tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality][i] * this.quality), auraEffect));
+                            finaleAuraBonuses.push(tempString);
+                        }
+                        
+                    }else{
+                        tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+                        finaleAuraBonuses.push(tempString);
+                    }
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
     ),    
 
     new Aura(
@@ -633,9 +807,9 @@ var auras = [
         'Grace',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% chance to avoid Elemental Ailments'],
-            ['% chance to Avoid Chaos Damage from Hits'],
+            '',
+            '##% chance to avoid Elemental Ailments',
+            '##% chance to Avoid Chaos Damage from Hits',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0.5, 0.2],
@@ -650,7 +824,7 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['+', ' Evasion rating'],
+            '+## to Evasion rating',
         ]
     ),  
 
@@ -661,9 +835,9 @@ var auras = [
         'Determination',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% chance to Avoid being Stunned'],
-            ['% of Evasion Rating as Extra Armour'],
+            '',
+            '##% chance to Avoid being Stunned',
+            '##% of Evasion Rating as Extra Armour',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 1, 0.5],
@@ -678,7 +852,7 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['% more Armour'],
+            '##% more Armour',
         ]
     ),  
 
@@ -689,9 +863,9 @@ var auras = [
         'Clarity',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['% increased Mana Recovery from Flasks'],
-            ['% increased Damage while on Full Mana'],
+            '',
+            '##% increased Mana Recovery from Flasks',
+            '##% increased Damage while on Full Mana',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0.5, 1],
@@ -706,8 +880,39 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['+', ' Mana Regeneration'],
-        ]
+            '+## Mana Regeneration',
+        ],
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    
+                    tempString = tempString.replace('##', calcStat(this.effectAtLevel[i][this.level], auraEffect));
+                    
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality !== 0){
+                    tempString = this.effectOfQuality[this.altQuality]
+
+                    if(this.altQuality == 1)
+                        tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+                    else
+                        tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+
+                    finaleAuraBonuses.push(tempString);
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
     ),    
 
     new Aura(
@@ -717,9 +922,9 @@ var auras = [
         'Precision',
         //AlternateQualityBonuses 
         [
-            [''],
-            [''],
-            ['% increased Damage'],
+            '',
+            '',
+            ['##% increased Damage','##% less Area of Effect'],
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0, 0.5],
@@ -740,9 +945,42 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['+', ' to Accuracy Rating'],
-            ['% increased Critical Strike Chance']
-        ]
+            '+## to Accuracy Rating',
+            '##% increased Critical Strike Chance'
+        ],
+
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    if(this.effectAtLevel[i][0].length == 2){
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
+                        tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
+                    } else {
+                        tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level], auraEffect));
+                    }
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality === 2){
+      
+                    for (let i = 0; i < this.effectOfQuality[this.altQuality].length; i++){
+                    tempString = this.effectOfQuality[this.altQuality][i];
+                    tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+                    finaleAuraBonuses.push(tempString);
+                    }
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
     ),  
     
     new Aura(
@@ -752,9 +990,9 @@ var auras = [
         'Vitality',
         //AlternateQualityBonuses 
         [
-            [''],
-            ['Leech ', ' % of Physical Attack Damage as Life'],
-            ['% increased Damage while on Full Life'],
+            '',
+            'Leech ##% of Physical Attack Damage as Life',
+            '% increased Damage while on Full Life',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0.02, 1],
@@ -769,8 +1007,39 @@ var auras = [
         ],
         //Aura Bonuses
         [
-            ['Regenerate ', ' Life per second'],
-        ]
+            'Regenerate ## Life per second',
+        ],
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    
+                    tempString = tempString.replace('##', calcStat(this.effectAtLevel[i][this.level], auraEffect));
+                    
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                if(this.quality !== 0 && this.altQuality !== 0){
+                    tempString = this.effectOfQuality[this.altQuality]
+
+                    if(this.altQuality == 1)
+                        tempString = tempString.replace('##', calcStat( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+                    else
+                        tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+
+                    finaleAuraBonuses.push(tempString);
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        }
     ),
     
 
@@ -781,35 +1050,58 @@ var auras = [
         'Envy',
         //AlternateQualityBonuses 
         [
-            [''],
-            [''],
-            [''],
+            '',
+            '',
+            '',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0, 0],
         //Values at each level for the aura
         [
-            [   [0,0],
+            [   [0, 0],
                 [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], 
                 [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], 
                 [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], 
-                [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141],       
+                [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141], [101, 141]       
             ],
-            [   [0,0]
+            [   [0, 0],
                 [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], 
                 [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], 
                 [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], 
-                [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], 
+                [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121], [91, 121] 
             ]
         ],
         //Aura Bonuses
         [
-            ['Adds ',' to ', ' additional Chaos Damage with Attacks'],
-            ['Adds ',' to ', ' additional Chaos Damage with Spells'],
-        ]
-    ),  
-    
+            'Adds ## to $$ additional Chaos Damage with Attacks',
+            'Adds ## to $$ additional Chaos Damage with Spells',
+        ],
 
+        function(globalAuraEffect){
+            let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
+    
+            let finaleAuraBonuses = [];
+    
+            let tempString;
+    
+            if(this.level !== 0 && this.level <= 40){
+            //Adding Aura Effect
+                for (let i = 0; i < this.effectOfAura.length; i++){
+                    tempString = this.effectOfAura[i];
+                    
+                    tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][1][0], auraEffect)); //Replace min value
+                    tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
+                    
+                    finaleAuraBonuses.push(tempString); 
+                }
+    
+                return finaleAuraBonuses;
+            } else return ['']
+        },
+
+        true //isSpecial
+    ), 
+    
     ];
 
     

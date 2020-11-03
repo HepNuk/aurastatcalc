@@ -13,6 +13,7 @@ var auras = require('./auraStats').default;
 var clusters = require('./clusterJewels').default;
 var trees = require('./treePassives').default;
 
+
 class App extends Component {
   state = {
     auras,
@@ -29,7 +30,7 @@ class App extends Component {
       tree: {
         amount: 0,
         timeless: 0,
-        total: function(){ console.log('total: ', this.timeless); return (Number(this.amount+this.timeless))}
+        total: function(){  return (Number(this.amount+this.timeless))}
       },
       cluster: {
         amount: 0,
@@ -131,12 +132,10 @@ class App extends Component {
 
    changeTimeless(newAuraEffect){
 
-    console.log(newAuraEffect);
     this.setState({auraEffect: {...this.state.auraEffect, ['tree']: {...this.state.auraEffect['tree'], timeless: Number(newAuraEffect)}}});
    }
 
   render() {
-      console.log(this.state.auras);
       return ( 
         <section className="app">
           <div className='header'>

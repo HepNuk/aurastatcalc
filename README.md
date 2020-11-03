@@ -35,7 +35,7 @@ This app allows a user to input diffrent settings matching his Gear/PassiveTree/
 - [x] ~~Tree Tab : (Outputing Said structure to Tree Tab)~~
 - [x] ~~Tree Tab : (Changing settings are reflected in Ouput)~~
 - [x] ~~Tree Tab : (Might of the Meek Support)~~
-- [ ] Gear Tab : (Outputing all option for each gear slot)
+- [x] Gear Tab : (Outputing all option for each gear slot)
 - [ ] Gear Tab : (Changes settings are reflected in Output)
 - [ ] Gear Tab : ('Auras from skills grant X% Damage' mod working)
 - [ ] Ascendancy Tab : (Working Ascendancy Tab and Data Structure)
