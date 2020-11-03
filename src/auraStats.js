@@ -84,13 +84,13 @@ class Aura {
             if(this.generosityType > 0 && this.generosityLevel > 0 ){
                 return this.generosityEffect[this.generosityType][this.generosityLevel];
             } else return 0;
-        }
+        };
 
         this.getTotalAuraEffect = function(globalAuraEffect){
             if (!(this.buff === true))
                 return this.specificAuraEffect + this.generosityAuraEffect() + globalAuraEffect;
             else return 0;
-        }
+        };
 
         this.printEffect = printEffect || function(globalAuraEffect){
             let auraEffect = this.getTotalAuraEffect(globalAuraEffect);
@@ -121,7 +121,7 @@ class Aura {
     
                 return finaleAuraBonuses;
             } else return ['']
-        }
+        };
 
 
 

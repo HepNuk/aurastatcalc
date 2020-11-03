@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropType from 'prop-types';
 import Aura from './Aura';
 import Specials from './Specials';
+import AuraMods from './AuraMods';
 
 export default class OutputBox extends Component {
     render() {
@@ -17,6 +18,7 @@ export default class OutputBox extends Component {
                 </div>
                     <Aura auras={this.props.auras} globalAuraEffect={this.props.globalAuraEffect}/>
                     <Specials clusters={this.props.clusters} />
+                    <AuraMods auras={this.props.auras} aurasFromSkills={this.props.aurasFromSkills} globalAuraEffect={this.props.globalAuraEffect}/>
             </div>
         </div>
     );

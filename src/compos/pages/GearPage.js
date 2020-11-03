@@ -10,6 +10,16 @@ export default class GearPage extends Component {
         twoHandWep: false
     }
 
+    generateAuraSelectList(){
+
+        let selectMenuList = [];
+
+        this.props.auras.forEach(aura => {
+
+            
+        });
+    }
+
     render() {
         return (
             <div className='mainapp gem_grps'>

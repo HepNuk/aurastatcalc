@@ -12,13 +12,14 @@ import './styles.css';
 var auras = require('./auraStats').default;
 var clusters = require('./clusterJewels').default;
 var trees = require('./treePassives').default;
-
+var aurasFromSkills = require('./aurasFromSkills').default;
 
 class App extends Component {
   state = {
     auras,
     clusters,
     trees,
+    aurasFromSkills,
 
     auraEffect: {
       asc: {
@@ -80,7 +81,8 @@ class App extends Component {
     this.setState({ auras: newAuraState });
   }
 
-   changeSpecificAuraEffect(newSpecificEffect, auraKey){
+  
+  changeSpecificAuraEffectClusters(newSpecificEffect, auraKey){
     if(this.findAuraIndex(auraKey) !== null){
       let auraIndex = this.findAuraIndex(auraKey);
 
@@ -89,6 +91,27 @@ class App extends Component {
       this.setState({ auras: newAuraState });
     }
    }
+
+   changeSpecificAuraEffectGear(newSpecificEffect, auraKey){
+    if(this.findAuraIndex(auraKey) !== null){
+      let auraIndex = this.findAuraIndex(auraKey);
+
+      let newAuraState = [...this.state.auras];
+      newAuraState[auraIndex].specificAuraEffect = Number(newSpecificEffect);
+      this.setState({ auras: newAuraState });
+    }
+   }
+
+   changeSpecificAuraEffectTotal(newSpecificEffect, auraKey){
+    if(this.findAuraIndex(auraKey) !== null){
+      let auraIndex = this.findAuraIndex(auraKey);
+
+      let newAuraState = [...this.state.auras];
+      newAuraState[auraIndex].specificAuraEffect = Number(newSpecificEffect);
+      this.setState({ auras: newAuraState });
+    }
+   }
+
 
    changeGlobalAuraEffect(newAuraEffect, page){
 
@@ -177,7 +200,7 @@ class App extends Component {
 
                           changeClusterAmount={this.changeClusterAmount.bind(this)}
                           changeGlobalAuraEffect={this.changeGlobalAuraEffect.bind(this)}
-                          changeSpecificAuraEffect={this.changeSpecificAuraEffect.bind(this)}
+                          changeSpecificAuraEffect={this.changeSpecificAuraEffectClusters.bind(this)}
                           clusters={clusters}
                          />
                       )}
@@ -207,7 +230,7 @@ class App extends Component {
                   </Switch> 
                 </div>
               
-            <OutputBox clusters={this.state.clusters} auras={this.state.auras} globalAuraEffect={this.state.auraEffect.total()} />
+            <OutputBox aurasFromSkills={this.state.aurasFromSkills} clusters={this.state.clusters} auras={this.state.auras} globalAuraEffect={this.state.auraEffect.total()} />
           </div>
           </Router>
         </section>
