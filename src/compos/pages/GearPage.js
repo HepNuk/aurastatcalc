@@ -6,6 +6,11 @@ import DisplayClusters from './clusterTabs/DisplayClusters';
 
 export default class GearPage extends Component {
 
+    onChangeTwoHand(e){
+
+        this.props.gear.weapons.twohand = !this.props.gear.weapons.twohand;
+        this.props.changeTwoHand(this.props.gear.weapons.twohand)
+    }
     render() {
         return (
             <div className='mainapp gem_grps'>
@@ -48,10 +53,10 @@ export default class GearPage extends Component {
                     <hr />
                     <h2>Weapons</h2> 
                     <h3><label style={{ paddingLeft: '5px', lineHeight: '35px', height: '35px', width: '180px'}} className='armours'>
-                        Two-Hand Weapon <input type='checkbox' />
+                        Two-Hand Weapon <input onChange={this.onChangeTwoHand.bind(this)} checked={this.props.gear.weapons.twohand} type='checkbox' />
                     </label></h3><br />
-                    <DisplayWeapons twoHand='notice here that two hand is active' name='Weapon 1' />
-                    <DisplayWeapons isDisabled='send disabled if two hand is active' name='Weapon 2' />
+                    <DisplayWeapons aurasFromSkills={this.props.aurasFromSkills} auraSelectList={this.props.auraSelectList} twohand={this.props.gear.weapons.twohand} name='Weapon 1' tag='WEAPON1'/>
+                    <DisplayWeapons aurasFromSkills={this.props.aurasFromSkills} auraSelectList={this.props.auraSelectList} isDisabled={this.props.gear.weapons.twohand} name='Weapon 2' tag='WEAPON2'/>
                 </div>
                 <div className='armour_grps'>
                     <hr />

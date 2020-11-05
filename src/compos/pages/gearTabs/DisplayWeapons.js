@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
 
 export default class DisplayWeapons extends Component {
+
+    twoHandActive(){
+        if (this.props.twohand){
+            return 4
+        }
+        else return 2
+    }
+
     render() {
         return (
             <div style={{width: '48.4%'}} className='armours'>
-                <div className='armour'>
+                <div style={this.props.isDisabled ? {pointerEvents: 'none', opacity: '0.20', color: '#FFF', textDecoration: 'line-through'}: {}} className='armour'>
 
                     <img src='img/cluster/notable.png' alt=''/>
 
@@ -21,7 +29,7 @@ export default class DisplayWeapons extends Component {
                     </div>
                         <br/>
                     <label>
-                        <span className='title-corruption'>{`Auras from your skills grant ${2}% increased Damage to you and nearby allies`}</span>
+                        <span className='title-corruption'>{`Auras from your skills grant ${this.twoHandActive()}% increased Damage to you and nearby allies`}</span>
                         <div className='inputs'>
                             <input style={{marginRight: '10px'}}type='checkbox' />
                         </div>

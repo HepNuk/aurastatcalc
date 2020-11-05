@@ -40,7 +40,9 @@ class App extends Component {
       weapons:{
         weapon1: [0, 0],
         weapon2: [0, 0],
-      }
+        twohand: false,
+      },
+      
     },
 
     auraEffect: {
@@ -147,13 +149,21 @@ class App extends Component {
       })
     });
 
-    tempGear = this.state.gear.weapons;
-    Object.keys(tempGear).forEach((weapon) => {
 
-      if(tempGear[weapon][0] !== 0 && tempGear[weapon][0] !== 0){
-        tempArray.push([tempGear[weapon][1], tempGear[weapon][0]]);
-      }
-    });
+ 
+
+    if(this.state.gear.weapons.weapon1 !== 0 && this.state.gear.weapons.weapon1 !== 0){
+      tempArray.push([this.state.gear.weapons.weapon1[1], this.state.gear.weapons.weapon1[0]]);
+    }
+
+    if(!this.state.gear.weapons.twohand && 
+        this.state.gear.weapons.weapon1 !== 0 && 
+          this.state.gear.weapons.weapon1 !== 0){
+
+      tempArray.push([this.state.gear.weapons.weapon2[1], this.state.gear.weapons.weapon2[0]]);
+    }
+
+  
   
 
     let globalAuraEffect = 0;
@@ -297,6 +307,21 @@ class App extends Component {
 
    }
 
+   changeTwoHand(newBoolean){
+    let newState = this.state.gear;
+
+    newState.weapons.twohand = newBoolean
+    console.log(newBoolean)
+    this.setState({gear: newState});
+   }
+
+   changeAuraPercentWeapon(newValue, wepon){
+
+     let newState = this.state.gear;
+
+
+   }
+
   render() {
       if(!this.state.auraSelectListLoaded){
           this.setState({auraSelectList: this.generateAuraSelectList()});
@@ -341,6 +366,7 @@ class App extends Component {
                       
                       render = {(props) => (
                         <GearPage {...props} 
+                          changeTwoHand={this.changeTwoHand.bind(this)}
                           changeArmourGlobalEffect={this.changeArmourGlobalEffect.bind(this)}
                           changeJewelryNumber={this.changeJewelryNumber.bind(this)}
                           changeGearSection={this.changeGearSection.bind(this)}
@@ -349,6 +375,7 @@ class App extends Component {
                           changeSpecificAuraEffect={this.changeSpecificAuraEffect.bind(this)}
                           clusters={clusters}
                           auras={auras} 
+                          aurasFromSkills={aurasFromSkills}
                           gear={this.state.gear}
                           auraSelectList={this.state.auraSelectList}
                           changeJewelryCorruption={this.changeJewelryCorruption.bind(this)}
