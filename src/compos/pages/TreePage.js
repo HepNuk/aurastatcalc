@@ -20,7 +20,7 @@ export default class TreePage extends Component {
                         <div className='notables'>
                             <div className='notable'>
                                 
-                                <img src={`img/tree/timless.png`} />
+                                <img src={`img/tree/timless.png`} alt=''/>
                             </div>
                             <input onChange={this.onChangeTimeless.bind(this)} defaultValue={this.props.timeless} type='number' min='0' max='100'/>
                             <span className='title'>%Aura Effect</span>

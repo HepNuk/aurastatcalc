@@ -21,10 +21,6 @@ export default class NavBar extends Component {
                         <button>Tree</button>
                     </Link>
                 <div className='divider' />
-                    <Link to='/aurastatcalc/clusters'>   
-                        <button>Clusters</button>
-                    </Link>
-                <div className='divider' />
                     <Link to='/aurastatcalc/gear'>   
                         <button>Gear</button>
                     </Link>

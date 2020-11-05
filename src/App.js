@@ -4,7 +4,6 @@ import NavBar from './compos/NavBar';
 import OutputBox from './compos/OutputBox';
 import AscendancyPage from './compos/pages/AscendancyPage';
 import TreePage from './compos/pages/TreePage';
-import ClusterPage from './compos/pages/ClusterPage';
 import GearPage from './compos/pages/GearPage';
 import GemPage from './compos/pages/GemPage';
 
@@ -21,10 +20,33 @@ class App extends Component {
     trees,
     aurasFromSkills,
 
+    auraSelectListLoaded: false,
+    auraSelectList: [], // [id, key, title]
+
+    gear: {
+      armour:{
+        helm: 10,
+        body: 20,
+        gloves: 30,
+        boots: 40,
+        total: function() {return this.helm + this.body + this.gloves + this.boots}
+      },
+      jewelry:{
+        amulet: {corruption1: [0, 0], corruption2: [0, 0], },
+        ring1: {corruption1: [0, 0], corruption2: [0, 0], },
+        ring2: {corruption1: [0, 0], corruption2: [0, 0], },
+        belt: {corruption1: [0, 0], corruption2: [0, 0], },
+      },
+      weapons:{
+        weapon1: [0, 0],
+        weapon2: [0, 0],
+      }
+    },
+
     auraEffect: {
       asc: {
         selected: 0,
-        options: [0,10,5],
+        options: [0, 10, 5],
         total: function(){ return this.options[this.selected] }
 
       },
@@ -45,6 +67,18 @@ class App extends Component {
       }
     }
   }
+
+  generateAuraSelectList = function(){
+
+
+    let selectMenuList = [];
+    
+    for (let i = 0; i < auras.length; i++){
+        
+        selectMenuList.push([i, auras[i].key, auras[i].title])
+    }
+    return selectMenuList;
+}
 
   changeLevel(newLevel, auraIndex){
 
@@ -81,35 +115,91 @@ class App extends Component {
     this.setState({ auras: newAuraState });
   }
 
+   changeSpecificAuraEffect(auraEffectPerKey){
+
+    let newAuraStat = [...this.state.auras];
+
+    newAuraStat.forEach((aura) => {aura.specificAuraEffect = 0});
+    
+    
+    auraEffectPerKey.forEach((auras) => {
+      let auraIndex = this.findAuraIndex(auras[0]);
+      if(auraIndex !== null){
+        newAuraStat[auraIndex].specificAuraEffect = Number(auras[1]);
+      }
+    });
+
+
+    this.setState({ auras: newAuraStat });
+
+   }
+
+   changeGearSection(){
+
+    let tempArray = [];
+    let tempGear = this.state.gear.jewelry;
+
+    Object.keys(tempGear).forEach((piece) => {
+      Object.keys(tempGear[piece]).forEach((corruption) => {
+        if (tempGear[piece][corruption][0] !== 0 && tempGear[piece][corruption][1] !== 0){
+          tempArray.push([tempGear[piece][corruption][1], Number(tempGear[piece][corruption][0])])
+        }
+      })
+    });
+
+    tempGear = this.state.gear.weapons;
+    Object.keys(tempGear).forEach((weapon) => {
+
+      if(tempGear[weapon][0] !== 0 && tempGear[weapon][0] !== 0){
+        tempArray.push([tempGear[weapon][1], tempGear[weapon][0]]);
+      }
+    });
   
-  changeSpecificAuraEffectClusters(newSpecificEffect, auraKey){
-    if(this.findAuraIndex(auraKey) !== null){
-      let auraIndex = this.findAuraIndex(auraKey);
 
-      let newAuraState = [...this.state.auras];
-      newAuraState[auraIndex].specificAuraEffect = Number(newSpecificEffect);
-      this.setState({ auras: newAuraState });
+    let globalAuraEffect = 0;
+    clusters.forEach(cluster => {
+      if (cluster.affects !== undefined){
+        if ( cluster.affects.length === 0 ){
+          globalAuraEffect += (cluster.auraEffect * cluster.amount);
+        } else {
+          if (cluster.auraEffect.length === undefined){
+           
+            cluster.affects.forEach((auraKey) => {
+              tempArray.push([auraKey, (cluster.auraEffect * cluster.amount)])
+             })
+
+          } else {
+
+            for (let i = 0; i < cluster.affects.length; i++){
+              cluster.affects[i].forEach((auraKey) => {
+                tempArray.push([auraKey, (cluster.auraEffect[i] * cluster.amount)])  
+            })
+            }
+          }
+        }
+      }
+    });
+
+    let reduced = [];
+    for (let i = 0; i < tempArray.length; i++){
+
+      let uniqueKey = tempArray[i][0];
+      let found = false;
+
+      for (let j = 0; j < reduced.length; j++){
+          if (reduced[j][0] === uniqueKey){
+            reduced[j][1] += tempArray[i][1];
+            found = true;
+            break;
+          }
+      }
+
+      if(!found){
+        reduced.push(tempArray[i]);
+      } 
     }
-   }
-
-   changeSpecificAuraEffectGear(newSpecificEffect, auraKey){
-    if(this.findAuraIndex(auraKey) !== null){
-      let auraIndex = this.findAuraIndex(auraKey);
-
-      let newAuraState = [...this.state.auras];
-      newAuraState[auraIndex].specificAuraEffect = Number(newSpecificEffect);
-      this.setState({ auras: newAuraState });
-    }
-   }
-
-   changeSpecificAuraEffectTotal(newSpecificEffect, auraKey){
-    if(this.findAuraIndex(auraKey) !== null){
-      let auraIndex = this.findAuraIndex(auraKey);
-
-      let newAuraState = [...this.state.auras];
-      newAuraState[auraIndex].specificAuraEffect = Number(newSpecificEffect);
-      this.setState({ auras: newAuraState });
-    }
+    this.changeSpecificAuraEffect(reduced);
+    return globalAuraEffect;
    }
 
 
@@ -118,6 +208,7 @@ class App extends Component {
     this.setState({auraEffect: {...this.state.auraEffect, [page]: {...this.state.auraEffect[page], amount: Number(newAuraEffect)}}});
    }
 
+
    changeClusterAmount(newAmount, clusterIndex){
 
     let newClusterStats = [...this.state.clusters];
@@ -125,6 +216,7 @@ class App extends Component {
     newClusterStats[clusterIndex].amount = Number(newAmount);
     this.setState({clusters: newClusterStats});
    }
+
 
    findAuraIndex(auraKey){
     let index = null;
@@ -137,6 +229,7 @@ class App extends Component {
     return index;
    }
    
+
    changeTreeNodes(){
 
     let newTreeStats = [...this.state.trees];
@@ -153,12 +246,63 @@ class App extends Component {
     
    }
 
+
    changeTimeless(newAuraEffect){
 
-    this.setState({auraEffect: {...this.state.auraEffect, ['tree']: {...this.state.auraEffect['tree'], timeless: Number(newAuraEffect)}}});
+    this.setState({auraEffect: {...this.state.auraEffect, tree: {...this.state.auraEffect.tree, timeless: Number(newAuraEffect)}}});
+   }
+
+
+   changeJewelryCorruption(newValue, jewelry, corruption){
+
+    corruption = 'corruption'+corruption;
+
+    let newstate = this.state.gear;
+    let newArray = newstate.jewelry[jewelry][corruption]
+    newArray[1] = newValue;
+
+    newstate.jewelry[jewelry][corruption] = Object.values(newArray);
+   
+
+    this.setState({ gear: newstate });
+
+    this.changeGearSection();
+   }
+
+   changeJewelryNumber(newValue, jewelry, corruption){
+
+    corruption = 'corruption'+corruption;
+
+    let newstate = this.state.gear;
+    let newArray = newstate.jewelry[jewelry][corruption]
+    newArray[0] = Number(newValue)
+
+    newstate.jewelry[jewelry][corruption] = Object.values(newArray);
+   
+    this.setState({ gear: newstate });
+
+    this.changeGearSection();
+   }
+
+   changeArmourGlobalEffect(newValue, armour){
+
+    let newState = this.state.gear;
+    newState.armour[armour] = newValue;
+    console.log(newValue, armour, newState)
+    this.setState({gear: newState});
+
+    newState = this.state.auraEffect;
+    newState.gear.amount = this.state.gear.armour.total();
+    this.setState({auraEffect: newState}); 
+
    }
 
   render() {
+      if(!this.state.auraSelectListLoaded){
+          this.setState({auraSelectList: this.generateAuraSelectList()});
+          this.setState({auraSelectListLoaded: true});
+      }
+
       return ( 
         <section className="app">
           <div className='header'>
@@ -192,24 +336,24 @@ class App extends Component {
                         />
                       )}
                     />
-
-                   <Route path='/aurastatcalc/clusters'
-                      
-                      render = {(props) => (
-                        <ClusterPage {...props} 
-
-                          changeClusterAmount={this.changeClusterAmount.bind(this)}
-                          changeGlobalAuraEffect={this.changeGlobalAuraEffect.bind(this)}
-                          changeSpecificAuraEffect={this.changeSpecificAuraEffectClusters.bind(this)}
-                          clusters={clusters}
-                         />
-                      )}
-                    />
                     
                     <Route path='/aurastatcalc/gear'
                       
                       render = {(props) => (
-                        <GearPage {...props} auras={auras} />
+                        <GearPage {...props} 
+                          changeArmourGlobalEffect={this.changeArmourGlobalEffect.bind(this)}
+                          changeJewelryNumber={this.changeJewelryNumber.bind(this)}
+                          changeGearSection={this.changeGearSection.bind(this)}
+                          changeClusterAmount={this.changeClusterAmount.bind(this)}
+                          changeGlobalAuraEffect={this.changeGlobalAuraEffect.bind(this)}
+                          changeSpecificAuraEffect={this.changeSpecificAuraEffect.bind(this)}
+                          clusters={clusters}
+                          auras={auras} 
+                          gear={this.state.gear}
+                          auraSelectList={this.state.auraSelectList}
+                          changeJewelryCorruption={this.changeJewelryCorruption.bind(this)}
+                          />
+                          
                       )}
                     />
 

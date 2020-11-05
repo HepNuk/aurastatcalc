@@ -103,7 +103,7 @@ class Aura {
             //Adding Aura Effect
                 for (let i = 0; i < this.effectOfAura.length; i++){
                     tempString = this.effectOfAura[i];
-                    if(this.effectAtLevel[i][0].length == 2){
+                    if(this.effectAtLevel[i][0].length === 2){
                         tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
                         tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
                     } else {
@@ -257,7 +257,7 @@ var auras = [
             //Adding Aura Effect
                 for (let i = 0; i < this.effectOfAura.length; i++){
                     tempString = this.effectOfAura[i];
-                    if(this.effectAtLevel[i][0].length == 2){
+                    if(this.effectAtLevel[i][0].length === 2){
                         tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
                         tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
                     } else {
@@ -630,7 +630,7 @@ var auras = [
             //Adding Aura Effect
                 for (let i = 0; i < this.effectOfAura.length; i++){
                     tempString = this.effectOfAura[i];
-                    if(this.effectAtLevel[i][0].length == 2){
+                    if(this.effectAtLevel[i][0].length === 2){
                         tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
                         tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
                     } else {
@@ -703,7 +703,7 @@ var auras = [
             //Adding Aura Effect
                 for (let i = 0; i < this.effectOfAura.length; i++){
                     tempString = this.effectOfAura[i];
-                    if(this.effectAtLevel[i][0].length == 2){
+                    if(this.effectAtLevel[i][0].length === 2){
                         tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
                         tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
                     } else {
@@ -769,7 +769,7 @@ var auras = [
             //Adding Aura Effect
                 for (let i = 0; i < this.effectOfAura.length; i++){
                     tempString = this.effectOfAura[i];
-                    if(this.effectAtLevel[i][0].length == 2){
+                    if(this.effectAtLevel[i][0].length === 2){
                         tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
                         tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
                     } else {
@@ -902,7 +902,7 @@ var auras = [
                 if(this.quality !== 0 && this.altQuality !== 0){
                     tempString = this.effectOfQuality[this.altQuality]
 
-                    if(this.altQuality == 1)
+                    if(this.altQuality === 1)
                         tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
                     else
                         tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
@@ -960,7 +960,7 @@ var auras = [
             //Adding Aura Effect
                 for (let i = 0; i < this.effectOfAura.length; i++){
                     tempString = this.effectOfAura[i];
-                    if(this.effectAtLevel[i][0].length == 2){
+                    if(this.effectAtLevel[i][0].length === 2){
                         tempString = tempString.replace('##', calcStatFloored(this.effectAtLevel[i][this.level][0], auraEffect)); //Replace min value
                         tempString = tempString.replace('$$', calcStatFloored(this.effectAtLevel[i][this.level][1], auraEffect)); //Replace max value
                     } else {
@@ -1029,7 +1029,7 @@ var auras = [
                 if(this.quality !== 0 && this.altQuality !== 0){
                     tempString = this.effectOfQuality[this.altQuality]
 
-                    if(this.altQuality == 1)
+                    if(this.altQuality === 1)
                         tempString = tempString.replace('##', calcStat( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
                     else
                         tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));

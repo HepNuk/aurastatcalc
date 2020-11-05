@@ -6,14 +6,14 @@ export default class DisplayCluster extends Component {
         this.props.cluster.amount = e.target.value;
 
         this.props.changeClusterAmount(e.target.value, this.props.indexCluster)
-        this.props.changeGlobalAuraEffect(this.props.calcClusterAuraEffect(), 'cluster');
+        this.props.changeGlobalAuraEffect(this.props.changeGearSection(), 'cluster');
         
     }
 
     render() {
         return (
-            <div className='auras'>
-                <div className='aura'>
+            <div className='armours'>
+                <div className='armour'>
 
                     <img src='img/cluster/notable.png' alt=''/>
 

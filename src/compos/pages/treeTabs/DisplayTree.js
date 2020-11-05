@@ -5,7 +5,7 @@ export default class DisplayTree extends Component {
     hasBorder(){
 
         if(this.props.tree.notable.hasBorder){
-            return <img className='border' src='img/borders/notable_border.webp' />
+            return <img className='border' src='img/borders/notable_border.webp' alt=''/>
         } else return null;
     }
 
@@ -21,7 +21,7 @@ export default class DisplayTree extends Component {
             return( <label>
                         <div className='motm'>
                                 <div className='motmpassives'>
-                                    <img src={`img/tree/motm.png`} />
+                                    <img src={`img/tree/motm.png`} alt=''/>
                                 </div>
                                 <input onClick={this.onChangeMOTM.bind(this)} value={this.props.tree.key} checked={this.props.tree.motm} type='checkbox' />
                                 <span className='title'>Might of the Meek</span>
@@ -62,7 +62,7 @@ export default class DisplayTree extends Component {
                     <div className='notables'>
                         <div className='notable'>
                             {this.hasBorder()}
-                            <img src={`img/tree/${this.props.tree.key.toLowerCase()}.png`} />
+                            <img src={`img/tree/${this.props.tree.key.toLowerCase()}.png`} alt=''/>
                         </div>
                     
                         <input onChange={this.onChangeNotable.bind(this)} value={this.props.tree.key} type='checkbox' id={this.props.tree.key.toLowerCase()} checked={this.props.tree.notable.isActive}/>
@@ -74,8 +74,8 @@ export default class DisplayTree extends Component {
                     <label>
                         <div className='smalls'>
                                 <div className='smallpassives'>
-                                    <img className='border' src='img/borders/small_border.webp' />
-                                    <img src={`img/tree/effect.png`} />
+                                    <img className='border' src='img/borders/small_border.webp' alt=''/>
+                                    <img src={`img/tree/effect.png`} alt=''/>
                                 </div>
                                 <input value={this.props.tree.smallPassives.indexOf(smallNode)} onClick={this.onChangeSmallNode.bind(this)} checked={smallNode[1]} type='checkbox' />
                                 <span className='title'>{6 * this.isMotmON()}% aura effect</span>

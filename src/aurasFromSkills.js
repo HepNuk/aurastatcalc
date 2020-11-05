@@ -31,7 +31,6 @@ class AurasFromSkills{
 
                 if(this.toFloor[i] === true){
                     let value = Math.floor(this.number[i] * totalValue)
-                    console.log(value);
                     toPush = this.statLine[i].replace('##', value)
                 } else {
                     let value = Math.floor(this.number[i] * totalValue * 100)/100
