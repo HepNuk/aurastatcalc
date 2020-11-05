@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/aurastatcalc/static/css/main.e4a27880.chunk.css",
-    "main.js": "/aurastatcalc/static/js/main.0574bf8b.chunk.js",
-    "main.js.map": "/aurastatcalc/static/js/main.0574bf8b.chunk.js.map",
+    "main.js": "/aurastatcalc/static/js/main.3111a802.chunk.js",
+    "main.js.map": "/aurastatcalc/static/js/main.3111a802.chunk.js.map",
     "runtime-main.js": "/aurastatcalc/static/js/runtime-main.e863b341.js",
     "runtime-main.js.map": "/aurastatcalc/static/js/runtime-main.e863b341.js.map",
     "static/js/2.acaa9842.chunk.js": "/aurastatcalc/static/js/2.acaa9842.chunk.js",
@@ -16,6 +16,6 @@
     "static/js/runtime-main.e863b341.js",
     "static/js/2.acaa9842.chunk.js",
     "static/css/main.e4a27880.chunk.css",
-    "static/js/main.0574bf8b.chunk.js"
+    "static/js/main.3111a802.chunk.js"
   ]
 }
