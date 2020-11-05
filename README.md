@@ -36,10 +36,11 @@ This app allows a user to input diffrent settings matching his Gear/PassiveTree/
 - [x] ~~Tree Tab : (Changing settings are reflected in Ouput)~~
 - [x] ~~Tree Tab : (Might of the Meek Support)~~
 - [x] Gear Tab : (Outputing all option for each gear slot)
-- [ ] Gear Tab : (Changes settings are reflected in Output)
+- [/] Gear Tab : ~~(Changes settings are reflected in Output)~~ Weapons
 - [ ] Gear Tab : ('Auras from skills grant X% Damage' mod working)
 - [ ] Ascendancy Tab : (Working Ascendancy Tab and Data Structure)
 - [ ] Ascendancy Tab : (Fit in Tree Tab? -- to see)
+- [x] Auras From Skills Grant : Have a working and expandable system for this mod.
 - [ ] Testing for bugs
 - [ ] Final Styling and Page Layout
 - [ ] Code clean up and optimizations (Using what I learned along the way to improve older code)
