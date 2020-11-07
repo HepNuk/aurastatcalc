@@ -1,6 +1,6 @@
 class AurasFromSkills{
     constructor(key, source, statLine, number, floor){
-        this.active = true;
+        this.active = false;
         this.key = key
         this.source = source;
         this.statLine = statLine;
@@ -52,9 +52,9 @@ var aurasFromSkills = [
     new AurasFromSkills ('GUARD', 'Guardian', ['+##% Physical Damage Reduction', '##% of Life Regenerated per second'], [1, 0.2], [true, false]),
     new AurasFromSkills ('SCIONN', 'Scion(Necro)', ['##% increased Attack and Cast Speed'], [2], [true]),
     new AurasFromSkills ('SCIONG', 'Scion(Guardian)', ['+##% Physical Damage Reduction'], [1], [true]),
-    new AurasFromSkills ('WEPONE1', 'Weapon One-Hand(1)', ['##% incerased Damage'], [2], [true]),
-    new AurasFromSkills ('WEPONE2', 'Weapon One-Hand(2)', ['##% incerased Damage'], [2], [true]),
-    new AurasFromSkills ('WEPTWO', 'Weapon Two-Hand', ['##% incerased Damage'], [4], [true]),
+    new AurasFromSkills ('WEAPON1', 'Weapon One-Hand(1)', ['##% increased Damage'], [2], [true]),
+    new AurasFromSkills ('WEAPON2', 'Weapon One-Hand(2)', ['##% increased Damage'], [2], [true]),
+    new AurasFromSkills ('WEPTWO', 'Weapon Two-Hand', ['##% increased Damage'], [4], [true]),
 
 ]
 

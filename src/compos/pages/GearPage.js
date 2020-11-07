@@ -10,7 +10,23 @@ export default class GearPage extends Component {
 
         this.props.gear.weapons.twohand = !this.props.gear.weapons.twohand;
         this.props.changeTwoHand(this.props.gear.weapons.twohand)
+        
+        let indexWep1 = 4;
+        let indexWep2 = 5;
+        let indexTwohand = 6;
+        
+        if(this.props.gear.weapons.twohand){
+            this.props.aurasFromSkills[indexTwohand].active = this.props.aurasFromSkills[indexWep1].active;
+            this.props.aurasFromSkills[indexWep2].active = false;
+            this.props.aurasFromSkills[indexWep1].active = false;
+        } else {
+            this.props.aurasFromSkills[indexWep1].active = this.props.aurasFromSkills[indexTwohand].active;
+            this.props.aurasFromSkills[indexTwohand].active = false;
+            this.props.aurasFromSkills[indexWep2].active = false;
+        }
+        this.props.changeAurasWithSkillMod();
     }
+    
     render() {
         return (
             <div className='mainapp gem_grps'>
@@ -55,8 +71,19 @@ export default class GearPage extends Component {
                     <h3><label style={{ paddingLeft: '5px', lineHeight: '35px', height: '35px', width: '180px'}} className='armours'>
                         Two-Hand Weapon <input onChange={this.onChangeTwoHand.bind(this)} checked={this.props.gear.weapons.twohand} type='checkbox' />
                     </label></h3><br />
-                    <DisplayWeapons aurasFromSkills={this.props.aurasFromSkills} auraSelectList={this.props.auraSelectList} twohand={this.props.gear.weapons.twohand} name='Weapon 1' tag='WEAPON1'/>
-                    <DisplayWeapons aurasFromSkills={this.props.aurasFromSkills} auraSelectList={this.props.auraSelectList} isDisabled={this.props.gear.weapons.twohand} name='Weapon 2' tag='WEAPON2'/>
+                    <DisplayWeapons 
+                        gear={this.props.gear.weapons.weapon1} changeAurasWithSkillMod={this.props.changeAurasWithSkillMod}
+                        changeAuraWeapon={this.props.changeAuraWeapon} changeAuraPercentWeapon={this.props.changeAuraPercentWeapon} 
+                        aurasFromSkills={this.props.aurasFromSkills} auraSelectList={this.props.auraSelectList} 
+                        twohand={this.props.gear.weapons.twohand} name='Weapon 1' tag='WEAPON1'
+                        />
+
+                    <DisplayWeapons 
+                        gear={this.props.gear.weapons.weapon2} changeAurasWithSkillMod={this.props.changeAurasWithSkillMod}
+                        changeAuraWeapon={this.props.changeAuraWeapon} changeAuraPercentWeapon={this.props.changeAuraPercentWeapon} 
+                        aurasFromSkills={this.props.aurasFromSkills} auraSelectList={this.props.auraSelectList} 
+                        isDisabled={this.props.gear.weapons.twohand} name='Weapon 2' tag='WEAPON2'
+                        />
                 </div>
                 <div className='armour_grps'>
                     <hr />

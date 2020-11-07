@@ -25,10 +25,10 @@ class App extends Component {
 
     gear: {
       armour:{
-        helm: 10,
-        body: 20,
-        gloves: 30,
-        boots: 40,
+        helm: 0,
+        body: 0,
+        gloves: 0,
+        boots: 0,
         total: function() {return this.helm + this.body + this.gloves + this.boots}
       },
       jewelry:{
@@ -298,7 +298,6 @@ class App extends Component {
 
     let newState = this.state.gear;
     newState.armour[armour] = newValue;
-    console.log(newValue, armour, newState)
     this.setState({gear: newState});
 
     newState = this.state.auraEffect;
@@ -315,10 +314,37 @@ class App extends Component {
     this.setState({gear: newState});
    }
 
-   changeAuraPercentWeapon(newValue, wepon){
+   changeAuraPercentWeapon(newValue, whichWeapon){
 
-     let newState = this.state.gear;
+    let newstate = this.state.gear;
+    let newArray = newstate.weapons[whichWeapon]
+    newArray[0] = Number(newValue);
 
+    newstate.weapons[whichWeapon] = Object.values(newArray);
+   
+
+    this.setState({ gear: newstate });
+
+    this.changeGearSection();
+   }
+
+   changeAuraWeapon(newValue, whichWeapon){
+    console.log('hi')
+    let newstate = this.state.gear;
+    let newArray = newstate.weapons[whichWeapon]
+    newArray[1] = newValue;
+
+    newstate.weapons[whichWeapon] = Object.values(newArray);
+
+    this.setState({ gear: newstate });
+
+
+    this.changeGearSection();
+   }
+
+   changeAurasWithSkillMod(){
+
+    this.setState({aurasFromSkills: aurasFromSkills});
 
    }
 
@@ -366,6 +392,10 @@ class App extends Component {
                       
                       render = {(props) => (
                         <GearPage {...props} 
+
+                          changeAurasWithSkillMod={this.changeAurasWithSkillMod.bind(this)}
+                          changeAuraPercentWeapon={this.changeAuraPercentWeapon.bind(this)}
+                          changeAuraWeapon={this.changeAuraWeapon.bind(this)}
                           changeTwoHand={this.changeTwoHand.bind(this)}
                           changeArmourGlobalEffect={this.changeArmourGlobalEffect.bind(this)}
                           changeJewelryNumber={this.changeJewelryNumber.bind(this)}

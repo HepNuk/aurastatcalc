@@ -391,7 +391,7 @@ var auras = [
         [
             '',
             '##% to Critical Strike Multiplier',
-            '##% of Life per second',
+            'Regenerate ##% of Life per second',
         ],
         //Values Per Quality of the diffrent alt Qualities
         [0, 0.25, 0.02],
