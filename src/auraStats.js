@@ -143,7 +143,7 @@ var auras = [
             "##% increased Movement Speed",
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 1, 0.25],
+        [0, 0.25, 0.05],
         //Values at each level for the aura
         [
             [   [0, 0],
@@ -180,7 +180,7 @@ var auras = [
             '##% increased Movement Speed while on Chilled Ground',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 1, 1],
+        [0, 0.5, 0.5],
         //Values at each level for the aura
         [
             [   0, 
@@ -326,7 +326,7 @@ var auras = [
             '##% increased Damage with Ailments',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.5, 0.5],
+        [0, 0.1, 0.25],
         //Values at each level for the aura
         [
             [   0,
@@ -394,7 +394,7 @@ var auras = [
             'Regenerate ##% of Life per second',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.25, 0.02],
+        [0, 0.1, 0.005],
         //Values at each level for the aura
         [
             [   0,
@@ -460,7 +460,7 @@ var auras = [
             'Damage Penetrates ##% Fire Resistance',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 1, 0.2],
+        [0, 0.25, 0.05],
         //Values at each level for the aura
         [
             [   0,
@@ -494,7 +494,7 @@ var auras = [
             'Damage Penetrates ##% Cold Resistance',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 1, 0.2],
+        [0, 0.25, 0.05],
         //Values at each level for the aura
         [
             [   0,
@@ -528,7 +528,7 @@ var auras = [
             'Damage Penetrates ##% Lightning Resistance',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 1, 0.2],
+        [0, 0.25, 0.05],
         //Values at each level for the aura
         [
             [   0,
@@ -562,7 +562,7 @@ var auras = [
             'Damage Penetrates ##% Elemental Resistance',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.5, 0.2],
+        [0, 0.1, 0.05],
         //Values at each level for the aura
         [
             [   0,
@@ -736,7 +736,7 @@ var auras = [
             ['##% increased Energy Shield Recharge rate', '##% slower start of Energy Shield Recharge']
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.5, [2, 1.5]],
+        [0, 0.25, [2, 0.5]],
         //Values at each level for the aura
         [
             [   0,
@@ -812,7 +812,7 @@ var auras = [
             '##% chance to Avoid Chaos Damage from Hits',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.5, 0.2],
+        [0, 0.1, 0.05],
         //Values at each level for the aura
         [
             [   0,
@@ -840,7 +840,7 @@ var auras = [
             '##% of Evasion Rating as Extra Armour',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 1, 0.5],
+        [0, 0.25, 0.1],
         //Values at each level for the aura
         [
             [   0,
@@ -868,7 +868,7 @@ var auras = [
             '##% increased Damage while on Full Mana',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.5, 1],
+        [0, 0.25, 0.25],
         //Values at each level for the aura
         [
             [   0,
@@ -924,10 +924,10 @@ var auras = [
         [
             '',
             '',
-            ['##% increased Damage','##% less Area of Effect'],
+            '##% increased Damage',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0, 0.5],
+        [0, 0, 0.1],
         //Values at each level for the aura
         [
             [
@@ -969,13 +969,11 @@ var auras = [
                     finaleAuraBonuses.push(tempString); 
                 }
     
-                if(this.quality !== 0 && this.altQuality === 2){
-      
-                    for (let i = 0; i < this.effectOfQuality[this.altQuality].length; i++){
-                    tempString = this.effectOfQuality[this.altQuality][i];
+                if(this.quality !== 0 && this.altQuality !== 0){
+                    tempString = this.effectOfQuality[this.altQuality]
                     tempString = tempString.replace('##', calcStatFloored( (this.statPerQuality[this.altQuality] * this.quality), auraEffect));
+    
                     finaleAuraBonuses.push(tempString);
-                    }
                 }
     
                 return finaleAuraBonuses;
@@ -995,7 +993,7 @@ var auras = [
             '% increased Damage while on Full Life',
         ],
         //Values Per Quality of the diffrent alt Qualities
-        [0, 0.02, 1],
+        [0, 0.02, 0.2],
         //Values at each level for the aura
         [
             [   0,
